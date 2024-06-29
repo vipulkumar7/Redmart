@@ -155,13 +155,13 @@ const Products: React.FC = () => {
                                     <h3 className="brandName">{item.brand}</h3>
                                     <h4>{item.title}</h4>
                                     <div className="rating">
-                                        {filledStar(item).map((it, index) => (
+                                        {filledStar(item).map((_it, index) => (
                                             <FontAwesomeIcon
                                                 icon={faStar}
                                                 key={index}
                                             />
                                         ))}
-                                        {emptyStar(item).map((it, index) => (
+                                        {emptyStar(item).map((_it, index) => (
                                             <FontAwesomeIcon
                                                 icon={faStarHalfAlt}
                                                 key={index}

@@ -1,4 +1,5 @@
-import { ReduxData, IOrders } from '../../Component/Types'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReduxData } from '../../Component/Types'
 import { Action } from './actions'
 import { ActionType } from './types'
 

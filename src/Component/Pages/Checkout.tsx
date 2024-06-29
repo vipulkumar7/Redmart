@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -6,11 +8,11 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Footer from './Footer'
 import Header from './Header'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import FormModal from '../modals/FormModal'
+// import FormModal from '../modals/FormModal'
 import { IAddress } from '../Types'
 import { RootState } from '../../redux/rootReducer'
 import { deleteAddress, getAddress } from '../../redux/address/actions'
-import UpdateAddress from './UpdateAddress'
+// import UpdateAddress from './UpdateAddress'
 
 const Checkout: React.FC = () => {
     const dispatch = useDispatch()
@@ -22,9 +24,9 @@ const Checkout: React.FC = () => {
     const addressData: IAddress[] = useSelector(
         (state: RootState) => state.addressReducer.addressData
     )
-    const [addModalShow, setAddModalShow] = useState<boolean>(false)
-    const [updateModalShow, setUpdateModalShow] = useState<boolean>(false)
-    const [editData, setEditData] = useState<IAddress>({
+    const [_addModalShow, setAddModalShow] = useState<boolean>(false)
+    const [_updateModalShow, setUpdateModalShow] = useState<boolean>(false)
+    const [_editData, setEditData] = useState<IAddress>({
         name: '',
         mobile: '',
         fullAddress: '',
@@ -41,13 +43,13 @@ const Checkout: React.FC = () => {
         dispatch(getAddress())
     }, [])
 
-    const addModalClose = () => {
-        setAddModalShow(false)
-    }
+    // const addModalClose = () => {
+    //     setAddModalShow(false)
+    // }
 
-    const updateModalClose = () => {
-        setUpdateModalShow(false)
-    }
+    // const updateModalClose = () => {
+    //     setUpdateModalShow(false)
+    // }
 
     const handleDeleteAddress = (id: number) => {
         dispatch(deleteAddress(id))
@@ -89,7 +91,7 @@ const Checkout: React.FC = () => {
                         >
                             Add Address
                         </button>
-                        <FormModal show={addModalShow} onHide={addModalClose} />
+                        {/* <FormModal show={addModalShow} onHide={addModalClose} /> */}
                     </ButtonToolbar>
                 </div>
                 <div>
@@ -149,11 +151,11 @@ const Checkout: React.FC = () => {
                                                     icon={faEdit}
                                                 />
                                             </span>
-                                            <UpdateAddress
+                                            {/* <UpdateAddress
                                                 show={updateModalShow}
                                                 onHide={updateModalClose}
                                                 editdata={editData}
-                                            />
+                                            /> */}
                                         </div>
                                         <div>
                                             {item.fullAddress} , {item.city}

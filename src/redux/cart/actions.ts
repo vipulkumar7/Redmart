@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { axiosInstance } from './../../axiosInstance/index'
 import { ActionType } from './types'
 import { Dispatch } from 'redux'
@@ -51,7 +53,7 @@ export const postCart = (cart: ReduxData) => (dispatch: Dispatch) => {
     dispatch(setCartSpinner(true))
     axiosInstance
         .post(`https://redmart-products.onrender.com/cart`, cart)
-        .then((response) => {
+        .then((_response) => {
             dispatch(setCartSpinner(false))
         })
         .catch((error) => {
@@ -65,9 +67,9 @@ export const cartIncrement = (cart: ReduxData) => (dispatch: Dispatch) => {
     dispatch(setCartSpinner(true))
     axiosInstance
         .put(`https://redmart-products.onrender.com/cart/${cart.id}`, cart)
-        .then((response) => {
+        .then((_response) => {
             dispatch(setCartSpinner(false))
-            dispatch(getCart())
+            dispatch(getCart() as any)
         })
         .catch((error) => {
             console.log(error)
@@ -80,8 +82,8 @@ export const cartDecrement = (cart: ReduxData) => (dispatch: Dispatch) => {
     dispatch(setCartSpinner(true))
     axiosInstance
         .put(`https://redmart-products.onrender.com/cart/${cart.id}`, cart)
-        .then((response) => {
-            dispatch(getCart())
+        .then((_response) => {
+            dispatch(getCart() as any)
             dispatch(setCartSpinner(false))
         })
         .catch((error) => {
@@ -94,9 +96,9 @@ export const deleteCart = (id: number) => (dispatch: Dispatch) => {
     dispatch(setCartSpinner(true))
     axiosInstance
         .delete(`https://redmart-products.onrender.com/cart/${id}`)
-        .then((response) => {
+        .then((_response) => {
             dispatch(setCartSpinner(false))
-            dispatch(getCart())
+            dispatch(getCart() as any)
         })
         .catch((error) => {
             console.log(error)
@@ -106,16 +108,16 @@ export const deleteCart = (id: number) => (dispatch: Dispatch) => {
 
 export const deleteAllCart = (cartIds: number[]) => (dispatch: Dispatch) => {
     dispatch(setCartSpinner(true))
-    let deleteAll: string[] = []
+    const deleteAll: string[] = []
     for (let i = 0; i < cartIds.length; i++) {
-        let endpoints = `https://redmart-products.onrender.com/cart/${cartIds[i]}`
+        const endpoints = `https://redmart-products.onrender.com/cart/${cartIds[i]}`
         deleteAll.push(endpoints)
     }
     axios
         .all(deleteAll.map((endpoint) => axios.delete(endpoint)))
-        .then((data) => {
+        .then((_data) => {
             dispatch(setCartSpinner(false))
-            dispatch(getCart())
+            dispatch(getCart() as any)
         })
         .catch((errors) => {
             console.error(errors)

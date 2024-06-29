@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useState } from 'react'
@@ -27,7 +28,7 @@ const Payment: React.FC = () => {
     const cart = location.state.paymentData
 
     const total = (Math.round(cart.total * 100) / 100).toFixed(2)
-    const [success, setSuccess] = useState<boolean>(false)
+    const [, setSuccess] = useState<boolean>(false)
     const stripe: any = useStripe()
     const elements: any = useElements()
     const navigate = useNavigate()
@@ -61,7 +62,7 @@ const Payment: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card: elements.getElement(CardElement),
         })

@@ -65,7 +65,7 @@ const Home: React.FC = () => {
     }
 
     const onClickAddToCart = (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+        _e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
         productDescData: ReduxData
     ) => {
         exclusiveProduct.quantity = 1
@@ -169,14 +169,14 @@ const Home: React.FC = () => {
                                     </NavLink>
                                     <div className="rating">
                                         {filledStar(product).map(
-                                            (it, index) => (
+                                            (_it, index) => (
                                                 <FontAwesomeIcon
                                                     icon={faStar}
                                                     key={index}
                                                 />
                                             )
                                         )}
-                                        {emptyStar(product).map((it, index) => (
+                                        {emptyStar(product).map((_it, index) => (
                                             <FontAwesomeIcon
                                                 icon={faStarHalfAlt}
                                                 key={index}
@@ -227,14 +227,14 @@ const Home: React.FC = () => {
                                     <h4>{product.title}</h4>
                                     <div className="rating">
                                         {filledStar(product).map(
-                                            (it, index) => (
+                                            (_it, index) => (
                                                 <FontAwesomeIcon
                                                     icon={faStar}
                                                     key={index}
                                                 />
                                             )
                                         )}
-                                        {emptyStar(product).map((it, index) => (
+                                        {emptyStar(product).map((_it, index) => (
                                             <FontAwesomeIcon
                                                 icon={faStarHalfAlt}
                                                 key={index}

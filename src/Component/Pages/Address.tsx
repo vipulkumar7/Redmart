@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     faEdit,
     faThumbtack,
@@ -9,18 +10,18 @@ import ButtonToolbar from 'react-bootstrap/esm/ButtonToolbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteAddress, getAddress } from '../../redux/address/actions'
 import { RootState } from '../../redux/rootReducer'
-import FormModal from '../modals/FormModal'
+// import FormModal from '../modals/FormModal'
 import { IAddress } from '../Types'
 import Footer from './Footer'
 import Header from './Header'
-import UpdateAddress from './UpdateAddress'
+// import UpdateAddress from './UpdateAddress'
 
 const Address: React.FC = () => {
     const dispatch = useDispatch()
 
-    const [addModalShow, setAddModalShow] = useState<boolean>(false)
-    const [updateModalShow, setUpdateModalShow] = useState<boolean>(false)
-    const [editData, setEditData] = useState<IAddress>({
+    const [_addModalShow, setAddModalShow] = useState<boolean>(false)
+    const [_updateModalShow, setUpdateModalShow] = useState<boolean>(false)
+    const [_editData, setEditData] = useState<IAddress>({
         name: '',
         mobile: '',
         fullAddress: '',
@@ -40,13 +41,13 @@ const Address: React.FC = () => {
         dispatch(getAddress())
     }, [])
 
-    const addModalClose = () => {
-        setAddModalShow(false)
-    }
+    // const addModalClose = () => {
+    //     setAddModalShow(false)
+    // }
 
-    const updateModalClose = () => {
-        setUpdateModalShow(false)
-    }
+    // const updateModalClose = () => {
+    //     setUpdateModalShow(false)
+    // }
 
     const handleDeleteAddress = (id: number) => {
         dispatch(deleteAddress(id))
@@ -96,7 +97,7 @@ const Address: React.FC = () => {
                         >
                             Add Address
                         </button>
-                        <FormModal show={addModalShow} onHide={addModalClose} />
+                        {/* <FormModal show={addModalShow} onHide={addModalClose} /> */}
                     </ButtonToolbar>
                 </div>
                 <div>
@@ -133,11 +134,11 @@ const Address: React.FC = () => {
                                                     icon={faEdit}
                                                 />
                                             </span>
-                                            <UpdateAddress
+                                            {/* <UpdateAddress
                                                 show={updateModalShow}
                                                 onHide={updateModalClose}
                                                 editdata={editData}
-                                            />
+                                            /> */}
                                             <span
                                                 onClick={() => {
                                                     setAsDefault(index)

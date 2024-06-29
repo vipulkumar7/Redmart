@@ -7,7 +7,7 @@ import { IPostOffice } from '../Types'
 import { RootState } from '../../redux/rootReducer'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const FormModal: React.FC = (props: any) => {
+const FormModal: React.FC<{any: any}> = (props: any) => {
     const dispatch = useDispatch()
 
     const [bool, setBool] = useState<boolean>(false)

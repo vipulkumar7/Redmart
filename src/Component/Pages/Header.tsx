@@ -9,7 +9,6 @@ import {
     faCaretUp,
     faCartPlus,
     faHome,
-    faShoppingBag,
     faShoppingBasket,
     faSignOutAlt,
     faStore,

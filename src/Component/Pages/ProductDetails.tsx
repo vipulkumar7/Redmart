@@ -19,7 +19,7 @@ import {
     getProductDescription,
     getRelatedProducts,
 } from '../../redux/productPage/actions'
-import Loader from '../Loader'
+// import Loader from '../Loader'
 import { ReduxData } from '../Types'
 import { filledStar, emptyStar } from '../../commonFunction'
 import { postCart } from '../../redux/cart/actions'
@@ -225,14 +225,14 @@ const ProductDetails: React.FC = () => {
                                     <h4>{product.title}</h4>
                                     <div className="rating">
                                         {filledStar(product).map(
-                                            (it, index) => (
+                                            (_it, index) => (
                                                 <FontAwesomeIcon
                                                     icon={faStar}
                                                     key={index}
                                                 />
                                             )
                                         )}
-                                        {emptyStar(product).map((it, index) => (
+                                        {emptyStar(product).map((_it, index) => (
                                             <FontAwesomeIcon
                                                 icon={faStarHalfAlt}
                                                 key={index}

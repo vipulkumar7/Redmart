@@ -1,5 +1,5 @@
 import { throttle } from 'redux-saga/effects';
-import * as Effect from 'redux-saga/effects';
+// import * as Effect from 'redux-saga/effects';
 import { workGetPostsFetch } from '../aboutPage/actions';
 import { ActionType } from '../aboutPage/types';
 
@@ -11,7 +11,7 @@ import { ActionType } from '../aboutPage/types';
 //     // yield put(getPostsSuccess(posts));
 // }
 
-const takeEvery: any = Effect.takeEvery;
+// const takeEvery: any = Effect.takeEvery;
 
 function* mySaga() {
     // yield takeEvery(ActionType.GET_POSTS_FETCH, workGetPostsFetch);

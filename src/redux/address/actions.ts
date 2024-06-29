@@ -25,7 +25,7 @@ export const postAddress = (address: IAddress) => (dispatch: Dispatch) => {
     dispatch(setSpinner(true))
     axiosInstance
         .post(`https://redmart-products.onrender.com/address`, address)
-        .then((response) => {
+        .then(() => {
             dispatch(setSpinner(false))
             // dispatch(getAddress())
         })
@@ -83,7 +83,7 @@ export const updateAddress =
         dispatch(setSpinner(true))
         axiosInstance
             .put(`https://redmart-products.onrender.com/address/${id}`, address)
-            .then((response) => {
+            .then(() => {
                 dispatch(setSpinner(false))
             })
             .catch((error) => {
