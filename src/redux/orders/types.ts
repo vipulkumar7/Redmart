@@ -1,0 +1,7 @@
+export enum ActionType {
+    GET_ORDERS = 'GET_ORDERS',
+    POST_ORDERS = 'POST_ORDERS',
+    SPINNER = 'SPINNER',
+    GET_SEARCH_ORDER = 'GET_SEARCH_ORDER',
+    GET_ORDERS_BY_ID = 'GET_ORDERS_BY_ID',
+}

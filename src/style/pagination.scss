@@ -1,0 +1,122 @@
+.post {
+    background-color: #eee;
+    margin: 2rem;
+    padding: 1rem;
+}
+.pagination {
+    margin: 1rem auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    margin-bottom: 50px;
+    line-height: 40px;
+}
+.active {
+    /* border: 1px solid black;
+  border-radius: 100%;
+  padding: 0 3px;
+  outline: none;
+  cursor: pointer; */
+    display: inline-block;
+    border: 1px solid #ff523b;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.active:hover {
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 467px) {
+    ul li {
+        margin: 0 5px 0 5px;
+    }
+    .active {
+        display: inline-block;
+        border: 1px solid #ff523b;
+        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    //Products
+
+    .pagination {
+        width: 100% !important;
+        margin-bottom: 50px;
+        line-height: 40px;
+    }
+
+    //About
+    .header-margin {
+        margin-top: 100px;
+    }
+}
+
+@media only screen and (min-width: 467px) and (max-width: 666px) {
+    ul li {
+        margin: 0 5px 0 5px;
+    }
+    .active {
+        display: inline-block;
+        border: 1px solid #ff523b;
+        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    //Products
+
+    .pagination {
+        width: 100% !important;
+        margin-bottom: 50px;
+        line-height: 40px;
+    }
+
+    //About
+    // .header-margin {
+    //     margin-top: 100px;
+    // }
+}
+
+@media only screen and (min-width: 666px) {
+    ul li {
+        margin: 0 5px 0 5px;
+    }
+    .active {
+        display: inline-block;
+        border: 1px solid #ff523b;
+        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    //Products
+
+    .pagination {
+        width: 100% !important;
+        margin-bottom: 50px;
+        line-height: 40px;
+    }
+
+    //About
+    // .header-margin {
+    //     margin-top: 100px;
+    // }
+}
