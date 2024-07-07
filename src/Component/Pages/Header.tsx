@@ -16,6 +16,7 @@ import {
     faSignOutAlt,
     faStore,
     faUser,
+    faSignInAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { imagePath } from '../../utils/images'
 import { RootState } from '../../redux/rootReducer'
@@ -213,6 +214,8 @@ const Header: React.FC = () => {
                             ) : <NavLink to="/Login" className={(navData) =>
                                 navData.isActive ? 'navHeader' : ''
                             }>
+                                <FontAwesomeIcon icon={faSignInAlt} />
+                                {' '}
                                 Login
                             </NavLink>}
                         </ul>
