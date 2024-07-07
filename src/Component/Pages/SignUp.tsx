@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+    useDispatch,
+    // useSelector 
+} from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
@@ -7,15 +10,21 @@ import { signUp } from '../../redux/auth/actions'
 import { useDocumentTitle } from '../setDocumentTitle'
 import { imagePath } from '../../utils/images'
 import Loader from '../Loader'
-import { AuthData, UserRegisterData } from '../Types'
-import { RootState } from '../../redux/rootReducer'
+import {
+    // AuthData, 
+    UserRegisterData
+} from '../Types'
+// import { RootState } from '../../redux/rootReducer'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const SignUp: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { isAuthenticated } = useAuth0();
+
     useDocumentTitle('Sign Up')
 
-    const auth: AuthData = useSelector((state: RootState) => state.authReducer)
+    // const auth: AuthData = useSelector((state: RootState) => state.authReducer)
 
     const [user, setUser] = useState<UserRegisterData>({
         name: '',
@@ -29,14 +38,14 @@ const SignUp: React.FC = () => {
         setUser({ name: '', email: '', password: '' })
     }
 
-    if (auth._id) {
+    if (isAuthenticated) {
         navigate('/')
     }
 
     return (
         <div id="page-container">
             <Header />
-            {auth.isLoading ? (
+            {isAuthenticated ? (
                 <Loader />
             ) : (
                 <div className="signup-page" id="content-wrap">

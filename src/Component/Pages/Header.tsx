@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+    // useDispatch,
+    useSelector
+} from 'react-redux'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
-import swal from 'sweetalert'
+// import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faAddressCard,
@@ -16,18 +19,23 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { imagePath } from '../../utils/images'
 import { RootState } from '../../redux/rootReducer'
-import { AuthData, ReduxData } from '../Types'
-import { signOut } from '../../redux/auth/actions'
+import {
+    // AuthData, 
+    ReduxData
+} from '../Types'
+// import { signOut } from '../../redux/auth/actions'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const Header: React.FC = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const location = useLocation()
+    const { user, isAuthenticated, logout } = useAuth0();
 
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
 
-    const auth: AuthData = useSelector((state: RootState) => state.authReducer)
+    // const auth: AuthData = useSelector((state: RootState) => state.authReducer)
     const cartData: ReduxData[] = useSelector(
         (state: RootState) => state.cartReducer1.cartData
     )
@@ -37,22 +45,22 @@ const Header: React.FC = () => {
         0
     )
 
-    const handleSignOut = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        e.preventDefault()
-        swal('Are you sure you want to Log out?', {
-            buttons: ['No', 'Yes'],
-        }).then(function (isConfirm) {
-            if (isConfirm) {
-                swal({
-                    title: 'Logout!',
-                    text: 'Successfully Logout!',
-                    icon: 'success',
-                })
-                dispatch(signOut())
-                navigate('/login')
-            }
-        })
-    }
+    // const handleSignOut = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    //     e.preventDefault()
+    //     swal('Are you sure you want to Log out?', {
+    //         buttons: ['No', 'Yes'],
+    //     }).then(function (isConfirm) {
+    //         if (isConfirm) {
+    //             swal({
+    //                 title: 'Logout!',
+    //                 text: 'Successfully Logout!',
+    //                 icon: 'success',
+    //             })
+    //             dispatch(signOut())
+    //             navigate('/login')
+    //         }
+    //     })
+    // }
 
     const handleMenu = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         e.preventDefault()
@@ -84,36 +92,28 @@ const Header: React.FC = () => {
                     </div>
                     <nav>
                         <ul id="MenuItems" className="nav-links">
-                            {auth.token ? (
-                                <li>
-                                    <NavLink
-                                        to="/"
-                                        className={(navData) =>
-                                            navData.isActive ? 'navHeader' : ''
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faHome} /> Home
-                                    </NavLink>
-                                </li>
-                            ) : (
-                                ''
-                            )}
-                            {auth.token ? (
-                                <li>
-                                    <NavLink
-                                        to="/products"
-                                        className={(navData) =>
-                                            navData.isActive ? 'navHeader' : ''
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faStore} />{' '}
-                                        Products
-                                    </NavLink>
-                                </li>
-                            ) : (
-                                ''
-                            )}
-                            {auth.token ? (
+                            <li>
+                                <NavLink
+                                    to="/"
+                                    className={(navData) =>
+                                        navData.isActive ? 'navHeader' : ''
+                                    }
+                                >
+                                    <FontAwesomeIcon icon={faHome} /> Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/products"
+                                    className={(navData) =>
+                                        navData.isActive ? 'navHeader' : ''
+                                    }
+                                >
+                                    <FontAwesomeIcon icon={faStore} />{' '}
+                                    Products
+                                </NavLink>
+                            </li>
+                            {isAuthenticated ?
                                 <li>
                                     <NavLink
                                         to="/cart"
@@ -123,31 +123,25 @@ const Header: React.FC = () => {
                                     >
                                         <FontAwesomeIcon icon={faCartPlus} />{' '}
                                         Cart
+
                                         <span className="header-cart-value">
                                             {' '}
                                             {totalCount ? totalCount : ''}
                                         </span>
                                     </NavLink>
-                                </li>
-                            ) : (
-                                ''
-                            )}
-                            {/* {auth.token ? (
-                                <li>
-                                    <NavLink
-                                        to="/about"
-                                        className={(navData) =>
-                                            navData.isActive ? 'navHeader' : ''
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faAddressCard} />{' '}
-                                        About
-                                    </NavLink>
-                                </li>
-                            ) : (
-                                ''
-                            )} */}
-                            {auth.token ? (
+                                </li> : ''}
+                            <li>
+                                <NavLink
+                                    to="/about"
+                                    className={(navData) =>
+                                        navData.isActive ? 'navHeader' : ''
+                                    }
+                                >
+                                    <FontAwesomeIcon icon={faAddressCard} />{' '}
+                                    About
+                                </NavLink>
+                            </li>
+                            {isAuthenticated ? (
                                 <li>
                                     <Dropdown
                                         onMouseOver={() => {
@@ -159,9 +153,14 @@ const Header: React.FC = () => {
                                         show={dropdownOpen}
                                     >
                                         <Dropdown.Toggle className="user-dropdown-margin">
-                                            <FontAwesomeIcon icon={faUser} />{' '}
+                                            {/* <FontAwesomeIcon icon={faUser} />{' '} */}
+                                            <span>
+                                                <img style={{
+                                                    borderRadius: "50%"
+                                                }} src={user?.picture} width={'30px'} height={'30px'} />
+                                            </span>
                                             <span className="authName">
-                                                {auth.name}{' '}
+                                                {user?.name}{' '}
                                             </span>
                                             <FontAwesomeIcon
                                                 icon={
@@ -198,21 +197,24 @@ const Header: React.FC = () => {
                                             </Dropdown.Item>
                                             <Dropdown.Item
                                                 href="/login"
-                                                onClick={(e) => {
-                                                    handleSignOut(e)
+                                                onClick={() => {
+                                                    logout();
+                                                    // handleSignOut(e)
                                                 }}
                                             >
                                                 <FontAwesomeIcon
                                                     icon={faSignOutAlt}
                                                 />{' '}
-                                                Logout
+                                                {isAuthenticated ? 'Logout' : "Login"}
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </li>
-                            ) : (
-                                ''
-                            )}
+                            ) : <NavLink to="/Login" className={(navData) =>
+                                navData.isActive ? 'navHeader' : ''
+                            }>
+                                Login
+                            </NavLink>}
                         </ul>
                     </nav>
                     {/* <span>
@@ -231,7 +233,7 @@ const Header: React.FC = () => {
                             />
                         )}
                 </div>
-            </div>
+            </div >
         </>
     )
 }
