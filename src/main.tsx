@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { PersistGate } from 'redux-persist/integration/react'
 import './style/style.scss'
