@@ -9,12 +9,15 @@ import Footer from './Footer'
 import Header from './Header'
 import { AuthData, LoginData } from '../Types'
 import { RootState } from '../../redux/rootReducer'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login: React.FC = () => {
     const auth: AuthData = useSelector((state: RootState) => state.authReducer)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { loginWithRedirect } = useAuth0();
+
     useDocumentTitle('Login')
 
     const [creds, setCreds] = useState<LoginData>({
@@ -82,6 +85,9 @@ const Login: React.FC = () => {
                                     />
                                     <button type="submit" className="btn1">
                                         Login
+                                    </button>
+                                    <button type="submit" className="btn1" onClick={() => loginWithRedirect()}>
+                                        Login with Google
                                     </button>
                                     <NavLink to="/forgot-password">
                                         Forgot password
