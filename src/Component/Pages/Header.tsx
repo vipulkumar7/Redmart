@@ -36,8 +36,6 @@ const Header: React.FC = () => {
     const location = useLocation()
     // const { user, isAuthenticated, logout } = useAuth0();
     const { userLoggedIn } = useAuth()!;
-    console.log(useAuth(), 'yuhiojpjmpo')
-
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
 
     // const auth: AuthData = useSelector((state: RootState) => state.authReducer)

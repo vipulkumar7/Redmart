@@ -70,8 +70,6 @@ export function AuthProvider({ children }: ChildrenProps) {
     setCurrentUser
   };
 
-  console.log({ value })
-
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
