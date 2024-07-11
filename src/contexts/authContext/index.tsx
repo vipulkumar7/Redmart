@@ -13,7 +13,7 @@ interface ValueProps {
   userLoggedIn: boolean;
   isEmailUser: boolean;
   isGoogleUser: boolean;
-  currentUser: null;
+  currentUser: any;
   setCurrentUser: React.Dispatch<React.SetStateAction<null>>;
 }
 
@@ -32,7 +32,6 @@ export function AuthProvider({ children }: ChildrenProps) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
-    // console.log(unsubscribe, 'unsubscribe')
     return unsubscribe;
   }, []);
 

@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
-import {
-    // useDispatch,
-    useSelector
-} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
-// import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faAddressCard,
@@ -20,25 +16,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { imagePath } from '../../utils/images'
 import { RootState } from '../../redux/rootReducer'
-import {
-    // AuthData, 
-    ReduxData
-} from '../Types'
-// import { signOut } from '../../redux/auth/actions'
+import { ReduxData } from '../Types'
 import Dropdown from 'react-bootstrap/Dropdown'
-// import { useAuth0 } from '@auth0/auth0-react'
 import { useAuth } from "../../contexts/authContext";
 import { doSignOut } from "../../firebase/auth";
 
 const Header: React.FC = () => {
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
     const location = useLocation()
-    // const { user, isAuthenticated, logout } = useAuth0();
-    const { userLoggedIn } = useAuth()!;
-    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
+    const { userLoggedIn, currentUser } = useAuth()!;
 
-    // const auth: AuthData = useSelector((state: RootState) => state.authReducer)
+    console.log(useAuth())
+
+    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
     const cartData: ReduxData[] = useSelector(
         (state: RootState) => state.cartReducer1.cartData
     )
@@ -47,23 +37,6 @@ const Header: React.FC = () => {
         (acc: number, curr: ReduxData) => acc + curr.quantity!,
         0
     )
-
-    // const handleSignOut = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    //     e.preventDefault()
-    //     swal('Are you sure you want to Log out?', {
-    //         buttons: ['No', 'Yes'],
-    //     }).then(function (isConfirm) {
-    //         if (isConfirm) {
-    //             swal({
-    //                 title: 'Logout!',
-    //                 text: 'Successfully Logout!',
-    //                 icon: 'success',
-    //             })
-    //             dispatch(signOut())
-    //             navigate('/login')
-    //         }
-    //     })
-    // }
 
     const handleMenu = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         e.preventDefault()
@@ -157,14 +130,14 @@ const Header: React.FC = () => {
                                     >
                                         <Dropdown.Toggle className="user-dropdown-margin">
                                             {/* <FontAwesomeIcon icon={faUser} />{' '} */}
-                                            {/* <span>
+                                            <span>
                                                 <img style={{
                                                     borderRadius: "50%"
-                                                }} src={user?.picture} width={'30px'} height={'30px'} />
-                                            </span> */}
-                                            {/* <span className="authName">
-                                                {currentUser?.displayName}{' '}
-                                            </span> */}
+                                                }} src={currentUser?.photoURL} width={'30px'} height={'30px'} />
+                                            </span>
+                                            <span className="authName">
+                                                {' '}{currentUser?.displayName}{' '}
+                                            </span>
                                             <FontAwesomeIcon
                                                 icon={
                                                     dropdownOpen
@@ -201,11 +174,9 @@ const Header: React.FC = () => {
                                             <Dropdown.Item
                                                 href="/login"
                                                 onClick={() => {
-                                                    // logout();
-                                                    // handleSignOut(e)
                                                     doSignOut().then(() => {
                                                         navigate("/login");
-                                                      });
+                                                    });
                                                 }}
                                             >
                                                 <FontAwesomeIcon

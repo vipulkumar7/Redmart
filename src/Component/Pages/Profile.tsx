@@ -1,16 +1,11 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
 import Header from './Header'
 import Footer from './Footer'
-// import { AuthData } from '../Types'
-// import { RootState } from '../../redux/rootReducer'
 import { imagePath } from '../../utils/images'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth } from "../../contexts/authContext";
 
 const Profile: React.FC = () => {
-    // const auth: AuthData = useSelector((state: RootState) => state.authReducer)
-    const { user } = useAuth0();
-
+    const { currentUser } = useAuth()!;
     return (
         <div id="page-container">
             <Header />
@@ -26,8 +21,8 @@ const Profile: React.FC = () => {
                     <div className="row row-2">
                         <div>
                             <h2>Personal Information</h2>
-                            <h4>Name: {user?.name}</h4>
-                            <h4>Email: {user?.email}</h4>
+                            <h4>Name: {currentUser?.displayName}</h4>
+                            <h4>Email: {currentUser?.email}</h4>
                         </div>
                     </div>
                 </div>

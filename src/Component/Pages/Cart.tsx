@@ -20,12 +20,12 @@ import {
     cartDecrement,
     deleteCart,
 } from '../../redux/cart/actions'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth } from "../../contexts/authContext";
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isAuthenticated } = useAuth0();
+    const { userLoggedIn } = useAuth()!;
 
     const cartData: ReduxData[] = useSelector(
         (state: RootState) => state.cartReducer1.cartData
@@ -71,11 +71,11 @@ const Cart: React.FC = () => {
     }
 
     const handlePlaceOrder = () => {
-        !isAuthenticated && swal({
+        !userLoggedIn && swal({
             title: 'Please login before goto payment page.',
             // icon: 'success',
         })
-        isAuthenticated ? navigate('/checkout', { state: { cartData, total } }) : navigate('/login')
+        userLoggedIn ? navigate('/checkout', { state: { cartData, total } }) : navigate('/login')
     }
 
     return (
