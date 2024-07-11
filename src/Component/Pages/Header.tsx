@@ -26,13 +26,17 @@ import {
 } from '../Types'
 // import { signOut } from '../../redux/auth/actions'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useAuth0 } from '@auth0/auth0-react'
+// import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth } from "../../contexts/authContext";
+import { doSignOut } from "../../firebase/auth";
 
 const Header: React.FC = () => {
     const navigate = useNavigate()
     // const dispatch = useDispatch()
     const location = useLocation()
-    const { user, isAuthenticated, logout } = useAuth0();
+    // const { user, isAuthenticated, logout } = useAuth0();
+    const { userLoggedIn } = useAuth()!;
+    console.log(useAuth(), 'yuhiojpjmpo')
 
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
 
@@ -114,7 +118,7 @@ const Header: React.FC = () => {
                                     Products
                                 </NavLink>
                             </li>
-                            {isAuthenticated ?
+                            {userLoggedIn ?
                                 <li>
                                     <NavLink
                                         to="/cart"
@@ -142,7 +146,7 @@ const Header: React.FC = () => {
                                     About
                                 </NavLink>
                             </li>
-                            {isAuthenticated ? (
+                            {userLoggedIn ? (
                                 <li>
                                     <Dropdown
                                         onMouseOver={() => {
@@ -155,14 +159,14 @@ const Header: React.FC = () => {
                                     >
                                         <Dropdown.Toggle className="user-dropdown-margin">
                                             {/* <FontAwesomeIcon icon={faUser} />{' '} */}
-                                            <span>
+                                            {/* <span>
                                                 <img style={{
                                                     borderRadius: "50%"
                                                 }} src={user?.picture} width={'30px'} height={'30px'} />
-                                            </span>
-                                            <span className="authName">
-                                                {user?.name}{' '}
-                                            </span>
+                                            </span> */}
+                                            {/* <span className="authName">
+                                                {currentUser?.displayName}{' '}
+                                            </span> */}
                                             <FontAwesomeIcon
                                                 icon={
                                                     dropdownOpen
@@ -199,19 +203,22 @@ const Header: React.FC = () => {
                                             <Dropdown.Item
                                                 href="/login"
                                                 onClick={() => {
-                                                    logout();
+                                                    // logout();
                                                     // handleSignOut(e)
+                                                    doSignOut().then(() => {
+                                                        navigate("/login");
+                                                      });
                                                 }}
                                             >
                                                 <FontAwesomeIcon
                                                     icon={faSignOutAlt}
                                                 />{' '}
-                                                {isAuthenticated ? 'Logout' : "Login"}
+                                                {userLoggedIn ? 'Logout' : "Login"}
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </li>
-                            ) : <NavLink to="/Login" className={(navData) =>
+                            ) : <NavLink to="/login" className={(navData) =>
                                 navData.isActive ? 'navHeader' : ''
                             }>
                                 <FontAwesomeIcon icon={faSignInAlt} />
