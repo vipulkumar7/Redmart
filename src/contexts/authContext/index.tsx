@@ -10,14 +10,6 @@ interface ChildrenProps {
   children?: ReactNode
 }
 
-// interface ValueProps {
-//   userLoggedIn: boolean;
-//   isEmailUser: boolean;
-//   isGoogleUser: boolean;
-//   currentUser: any;
-//   setCurrentUser: React.Dispatch<React.SetStateAction<null>>;
-// }
-
 const AuthContext = React.createContext<ValueProps | null>(null);
 
 export function useAuth() {
