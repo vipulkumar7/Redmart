@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -81,7 +82,6 @@ const Orders: React.FC = () => {
                     {currentItems
                         .flat()
                         .reverse()
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         .map((element: any) =>
                             element.cart.map((item: ReduxData) => {
                                 return (

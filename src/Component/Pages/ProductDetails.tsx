@@ -84,97 +84,97 @@ const ProductDetails: React.FC = () => {
             <Header />
             <div id="content-wrap">
                 {
-                // productSpinner ? (
-                //     <Loader />
-                // ) : 
-                (
-                    <div className="small-container single-product">
-                        <div className="row">
-                            <div className="col_2">
-                                <img
-                                    src={productDescData?.image}
-                                    alt="gallery-1"
-                                    id="ProductImg"
-                                    width="100%"
-                                    height="100%"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div className="col_2">
-                                <p>{productDescData?.category}</p>
-                                <h1 className="description-title">
-                                    {productDescData?.title}
-                                </h1>
-                                <h4>
-                                    <FontAwesomeIcon icon={faRupeeSign} />
-                                    {productDescData?.price}
-                                </h4>
-                                <select
-                                    className="dropdown1"
-                                    defaultValue={'default'}
-                                    onChange={(e) => {
-                                        setSize(e.target.value)
-                                    }}
-                                >
-                                    <option value="default" disabled>
-                                        Select Size
-                                    </option>
-                                    <option value="Small">S</option>
-                                    <option value="Medium">M</option>
-                                    <option value="Large">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max="5"
-                                    value={quantity}
-                                    onChange={(e) => onChangeQuantity(e)}
-                                />
-                                <span
-                                    className={
-                                        size
-                                            ? 'btn1 cursor'
-                                            : `btn1 ${!flag ? 'opacity' : ''}`
-                                    }
-                                    onClick={() => {
-                                        onClickAddToCart(productDescData)
-                                    }}
-                                    data-tip
-                                    data-for={!flag ? 'selectSize' : ''}
-                                >
-                                    {flag ? (
-                                        <span
-                                            className="cursor"
-                                            onClick={() => {
-                                                navigate('/cart')
-                                            }}
-                                        >
-                                            Go to cart
-                                        </span>
-                                    ) : (
-                                        'Add To Cart'
-                                    )}
-                                </span>
-                                <ReactTooltip
-                                    id="selectSize"
-                                    place="top"
-                                    effect="solid"
-                                    globalEventOff={'click'}
-                                >
-                                    {!size && 'Please select a Size to proceed'}
-                                </ReactTooltip>
-                                <h3>
-                                    Product Details{' '}
-                                    <FontAwesomeIcon icon={faIndent} />
-                                </h3>
-                                <br />
-                                <p>{productDescData?.description}</p>
+                    // productSpinner ? (
+                    //     <Loader />
+                    // ) : 
+                    (
+                        <div className="small-container single-product">
+                            <div className="row">
+                                <div className="col_2">
+                                    <img
+                                        src={productDescData?.image}
+                                        alt="gallery-1"
+                                        id="ProductImg"
+                                        width="100%"
+                                        height="100%"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div className="col_2">
+                                    <p>{productDescData?.category}</p>
+                                    <h1 className="description-title">
+                                        {productDescData?.title}
+                                    </h1>
+                                    <h4>
+                                        <FontAwesomeIcon icon={faRupeeSign} />
+                                        {productDescData?.price}
+                                    </h4>
+                                    <select
+                                        className="dropdown1"
+                                        defaultValue={'default'}
+                                        onChange={(e) => {
+                                            setSize(e.target.value)
+                                        }}
+                                    >
+                                        <option value="default" disabled>
+                                            Select Size
+                                        </option>
+                                        <option value="Small">S</option>
+                                        <option value="Medium">M</option>
+                                        <option value="Large">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        max="5"
+                                        value={quantity}
+                                        onChange={(e) => onChangeQuantity(e)}
+                                    />
+                                    <span
+                                        className={
+                                            size
+                                                ? 'btn1 cursor'
+                                                : `btn1 ${!flag ? 'opacity' : ''}`
+                                        }
+                                        onClick={() => {
+                                            onClickAddToCart(productDescData)
+                                        }}
+                                        data-tip
+                                        data-for={!flag ? 'selectSize' : ''}
+                                    >
+                                        {flag ? (
+                                            <span
+                                                className="cursor"
+                                                onClick={() => {
+                                                    navigate('/cart')
+                                                }}
+                                            >
+                                                Go to cart
+                                            </span>
+                                        ) : (
+                                            'Add To Cart'
+                                        )}
+                                    </span>
+                                    <ReactTooltip
+                                        id="selectSize"
+                                        place="top"
+                                        effect="solid"
+                                        globalEventOff={'click'}
+                                    >
+                                        {!size && 'Please select a Size to proceed'}
+                                    </ReactTooltip>
+                                    <h3>
+                                        Product Details{' '}
+                                        <FontAwesomeIcon icon={faIndent} />
+                                    </h3>
+                                    <br />
+                                    <p>{productDescData?.description}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
                 {/*Title */}
                 <div className="small-container">
@@ -194,7 +194,6 @@ const ProductDetails: React.FC = () => {
                 {/*Products */}
                 <div
                     className="realated_products"
-                    // style={{ marginBottom: '40px' }}
                 >
                     {productSpinner ? (
                         <SpinnerCircular

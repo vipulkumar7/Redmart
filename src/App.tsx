@@ -22,8 +22,6 @@ const SignUp = lazy(() => import('./Component/Pages/SignUp'))
 const Login = lazy(() => import('./Component/Pages/Login'))
 const About = lazy(() => import('./Component/Pages/About'))
 const Contact = lazy(() => import('./Component/Pages/Contact'))
-// const Login1 = lazy(() => import('./Component/auth/Login1'))
-// const Register = lazy(() => import('./Component/auth/Register'))
 const NoPageFound = lazy(() => import('./Component/Pages/NoPageFound'))
 
 const PUBLIC_KEY =
@@ -55,8 +53,6 @@ const App: React.FC = () => {
               <Route path="/address" element={<Address />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
-              {/* <Route path="/signup" element={<Register />} />
-              <Route path="/login" element={<Login1 />} /> */}
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/profile" element={<Profile />} />
