@@ -4,17 +4,10 @@ import React, { useContext, useState, useEffect, ReactNode } from "react";
 import { auth } from "../../firebase/firebase";
 // import { GoogleAuthProvider } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
+import { ValueProps } from "../../Component/Types";
 
 interface ChildrenProps {
   children?: ReactNode
-}
-
-interface ValueProps {
-  userLoggedIn: boolean;
-  isEmailUser: boolean;
-  isGoogleUser: boolean;
-  currentUser: any;
-  setCurrentUser: React.Dispatch<React.SetStateAction<null>>;
 }
 
 const AuthContext = React.createContext<ValueProps | null>(null);

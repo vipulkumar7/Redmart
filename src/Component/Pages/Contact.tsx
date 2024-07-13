@@ -6,8 +6,6 @@ import { useDocumentTitle } from '../setDocumentTitle'
 import { RootState } from '../../redux/rootReducer'
 import { getPostsFetch } from '../../redux/aboutPage/actions'
 import { IPosts } from '../Types'
-// import axiosInstance from '../../axiosInstance'
-// import axios from 'axios'
 
 const Contact: React.FC = () => {
     const dispatch = useDispatch()
