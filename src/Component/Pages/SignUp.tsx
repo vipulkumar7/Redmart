@@ -41,6 +41,7 @@ const SignUp: React.FC = () => {
                     <div className="row">
                         <div className="col_2">
                             <img
+                                className='home_img'
                                 src={imagePath.image}
                                 alt="image-1"
                                 width="100%"
