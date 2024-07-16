@@ -143,55 +143,55 @@ const Home: React.FC = () => {
                 <div className="small-container">
                     <h2 className="title">Featured Products</h2>
                     {
-                        // productSpinner ? (
-                        //     <Loader />
-                        // ) : 
-                        (
-                            <div className="row">
-                                {featureProductData?.map((product) => (
-                                    <div
-                                        className="col_4"
-                                        key={product.id}
-                                        onClick={() => {
-                                            onClickProductDetails(product.id)
-                                        }}
-                                    >
-                                        <NavLink to="/product-details">
-                                            <img
-                                                src={product.image}
-                                                alt="product-1"
-                                                width="230px"
-                                                height="300px"
-                                                loading="lazy"
-                                            />
-                                        </NavLink>
-                                        <NavLink to="/product-details">
-                                            <h4>{product.title}</h4>
-                                        </NavLink>
-                                        <div className="rating">
-                                            {filledStar(product).map(
-                                                (_it, index) => (
-                                                    <FontAwesomeIcon
-                                                        icon={faStar}
-                                                        key={index}
-                                                    />
-                                                )
-                                            )}
-                                            {emptyStar(product).map((_it, index) => (
+                    // productSpinner ? (
+                    //     <Loader />
+                    // ) : 
+                    (
+                        <div className="row">
+                            {featureProductData?.map((product) => (
+                                <div
+                                    className="col_4"
+                                    key={product.id}
+                                    onClick={() => {
+                                        onClickProductDetails(product.id)
+                                    }}
+                                >
+                                    <NavLink to="/product-details">
+                                        <img
+                                            src={product.image}
+                                            alt="product-1"
+                                            width="230px"
+                                            height="300px"
+                                            loading="lazy"
+                                        />
+                                    </NavLink>
+                                    <NavLink to="/product-details">
+                                        <h4>{product.title}</h4>
+                                    </NavLink>
+                                    <div className="rating">
+                                        {filledStar(product).map(
+                                            (_it, index) => (
                                                 <FontAwesomeIcon
-                                                    icon={faStarHalfAlt}
+                                                    icon={faStar}
                                                     key={index}
                                                 />
-                                            ))}
-                                        </div>
-                                        <p>
-                                            <FontAwesomeIcon icon={faRupeeSign} />{' '}
-                                            {product.price}
-                                        </p>
+                                            )
+                                        )}
+                                        {emptyStar(product).map((_it, index) => (
+                                            <FontAwesomeIcon
+                                                icon={faStarHalfAlt}
+                                                key={index}
+                                            />
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                    <p>
+                                        <FontAwesomeIcon icon={faRupeeSign} />{' '}
+                                        {product.price}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* Featured Products End */}
