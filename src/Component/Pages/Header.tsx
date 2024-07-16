@@ -187,13 +187,13 @@ const Header: React.FC = () => {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </li>
-                            ) : <NavLink to="/login" className={(navData) =>
+                            ) : <li><NavLink to="/login" className={(navData) =>
                                 navData.isActive ? 'navHeader' : ''
                             }>
                                 <FontAwesomeIcon icon={faSignInAlt} />
                                 {' '}
                                 Login
-                            </NavLink>}
+                            </NavLink></li>}
                         </ul>
                     </nav>
                     {/* <span>
