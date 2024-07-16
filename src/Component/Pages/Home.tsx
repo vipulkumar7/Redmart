@@ -97,6 +97,7 @@ const Home: React.FC = () => {
                             </div>
                             <div className="col_2">
                                 <img
+                                    className='home_img'
                                     src={imagePath.image}
                                     alt="image1.jpeg"
                                     loading="lazy"

@@ -53,6 +53,7 @@ const Login: React.FC = () => {
                     <div className="row">
                         <div className="col_2">
                             <img
+                                className='home_img'
                                 src={imagePath.image}
                                 alt="image1"
                                 width="100%"
