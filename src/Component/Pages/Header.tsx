@@ -75,7 +75,9 @@ const Header: React.FC = () => {
                                         navData.isActive ? 'navHeader' : ''
                                     }
                                 >
-                                    <FontAwesomeIcon icon={faHome} /> Home
+                                    <span className='text-color-header'>
+                                        <FontAwesomeIcon icon={faHome} /> Home
+                                    </span>
                                 </NavLink>
                             </li>
                             <li>
@@ -85,8 +87,10 @@ const Header: React.FC = () => {
                                         navData.isActive ? 'navHeader' : ''
                                     }
                                 >
-                                    <FontAwesomeIcon icon={faStore} />{' '}
-                                    Products
+                                    <span className='text-color-header'>
+                                        <FontAwesomeIcon icon={faStore} />{' '}
+                                        Products
+                                    </span>
                                 </NavLink>
                             </li>
                             {userLoggedIn ?
@@ -97,8 +101,10 @@ const Header: React.FC = () => {
                                             navData.isActive ? 'navHeader' : ''
                                         }
                                     >
-                                        <FontAwesomeIcon icon={faCartPlus} />{' '}
-                                        Cart
+                                        <span className='text-color-header'>
+                                            <FontAwesomeIcon icon={faCartPlus} />{' '}
+                                            Cart
+                                        </span>
 
                                         <span className="header-cart-value">
                                             {' '}
@@ -113,8 +119,10 @@ const Header: React.FC = () => {
                                         navData.isActive ? 'navHeader' : ''
                                     }
                                 >
-                                    <FontAwesomeIcon icon={faAddressCard} />{' '}
-                                    About
+                                    <span className='text-color-header'>
+                                        <FontAwesomeIcon icon={faAddressCard} />{' '}
+                                        About
+                                    </span>
                                 </NavLink>
                             </li>
                             {userLoggedIn ? (
@@ -190,9 +198,11 @@ const Header: React.FC = () => {
                             ) : <li><NavLink to="/login" className={(navData) =>
                                 navData.isActive ? 'navHeader' : ''
                             }>
-                                <FontAwesomeIcon icon={faSignInAlt} />
-                                {' '}
-                                Login
+                                <span className='text-color-header'>
+                                    <FontAwesomeIcon icon={faSignInAlt} />
+                                    {' '}
+                                    Login
+                                </span>
                             </NavLink></li>}
                         </ul>
                     </nav>

@@ -691,14 +691,16 @@ form a {
 }
 
 #content-wrap {
-    padding-bottom: 4.5rem; /* Footer height */
+    padding-bottom: 4.5rem;
+    /* Footer height */
 }
 
 #footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem; /* Footer height */
+    height: 2.5rem;
+    /* Footer height */
 }
 
 .footer-container {
@@ -1148,6 +1150,10 @@ input[type='search']::-webkit-search-cancel-button {
     }
 
     a {
+        color: black;
+    }
+
+    .text-color-header {
         color: #fff;
     }
 
