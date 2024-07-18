@@ -105,7 +105,9 @@ const Login: React.FC = () => {
                                     </NavLink> */}
                                     <br />
                                     <NavLink to="/signup" style={{ color: '#5f5a5c' }}>
-                                        Click here for Sign up
+                                        Click here for <span style={{ color: '#11C8B1' }}>
+                                            Sign up
+                                        </span>
                                     </NavLink>
                                 </form>
                                 <br />

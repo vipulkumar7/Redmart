@@ -96,10 +96,9 @@ const SignUp: React.FC = () => {
                                         {isRegistering ? "Signing Up..." : "Sign Up"}
                                     </button>
                                     <NavLink to="/login" style={{ color: '#5f5a5c' }}>
-                                        Already a member?{' '}
+                                        Already a member?
                                         <span style={{ color: '#11C8B1' }}>
-                                            {' '}
-                                            Sign In{' '}
+                                            Sign In
                                         </span>
                                     </NavLink>
                                 </form>
