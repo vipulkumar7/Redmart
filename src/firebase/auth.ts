@@ -9,7 +9,7 @@ import {
   updatePassword,
   signInWithPopup,
   GoogleAuthProvider,
-  FacebookAuthProvider
+  GithubAuthProvider
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (
@@ -34,8 +34,8 @@ export const doSignInWithGoogle = async () => {
   // add user to firestore
 };
 
-export const doSignInWithFacebook = async () => {
-  const provider = new FacebookAuthProvider();
+export const doSignInWithGithub = async () => {
+  const provider = new GithubAuthProvider();
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
   console.log(user);
