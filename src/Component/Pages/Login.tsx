@@ -8,6 +8,7 @@ import Header from './Header'
 import {
     doSignInWithEmailAndPassword,
     doSignInWithGoogle,
+    doSignInWithFacebook
 } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext";
 
@@ -34,6 +35,17 @@ const Login: React.FC = () => {
         if (!isSigningIn) {
             setIsSigningIn(true);
             doSignInWithGoogle().catch((e: any) => {
+                console.log(e)
+                setIsSigningIn(false);
+            });
+        }
+    };
+
+    const onFacebookSignIn = (e: any) => {
+        e.preventDefault();
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+            doSignInWithFacebook().catch((e: any) => {
                 console.log(e)
                 setIsSigningIn(false);
             });
@@ -99,6 +111,12 @@ const Login: React.FC = () => {
                                             onGoogleSignIn(e);
                                         }}>
                                         Login with Google
+                                    </button>
+                                    <button className="btn1" disabled={isSigningIn}
+                                        onClick={(e) => {
+                                            onFacebookSignIn(e);
+                                        }}>
+                                        Login with Facebook
                                     </button>
                                     {/* <NavLink to="/forgot-password">
                                         Forgot password
