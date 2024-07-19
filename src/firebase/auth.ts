@@ -9,6 +9,7 @@ import {
   updatePassword,
   signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (
@@ -27,6 +28,14 @@ export const doSignInWithEmailAndPassword = (
 
 export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
+  const user = result.user;
+  console.log(user);
+  // add user to firestore
+};
+
+export const doSignInWithFacebook = async () => {
+  const provider = new FacebookAuthProvider();
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
   console.log(user);
