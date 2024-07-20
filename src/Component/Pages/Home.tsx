@@ -103,7 +103,7 @@ const Home: React.FC = () => {
                                     loading="eager"
                                     width='640px'
                                     height='652px'
-                                    fetchPriority='low'
+                                    fetchPriority='high'
                                 />
                             </div>
                         </div>
