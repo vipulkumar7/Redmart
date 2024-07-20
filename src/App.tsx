@@ -6,9 +6,10 @@ import Loader from './Component/Loader'
 import Profile from './Component/Pages/Profile'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 // import PrivateRoute from './routing/PrivateRoute'
 import { AuthProvider } from "./contexts/authContext";
-import { Analytics } from '@vercel/analytics/react';
 
 const Home = lazy(() => import('./Component/Pages/Home'))
 const Products = lazy(() => import('./Component/Pages/Products'))
@@ -60,6 +61,7 @@ const App: React.FC = () => {
               <Route path="*" element={<NoPageFound />} />
             </Routes>
             <Analytics />
+            <SpeedInsights />
           </AuthProvider>
         </Elements>
       </Suspense>
