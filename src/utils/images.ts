@@ -44,6 +44,7 @@ import gallery2 from '../assets/images/gallery-2.jpg'
 import gallery3 from '../assets/images/gallery-3.jpg'
 import gallery4 from '../assets/images/gallery-4.jpg'
 import image from '../assets/images/image1.png'
+import image1 from '../assets/images/image.jpeg'
 import logoCocaCola from '../assets/images/logo-coca-cola.png'
 import logoGodrej from '../assets/images/logo-godrej.png'
 import logoOppo from '../assets/images/logo-oppo.png'
@@ -72,7 +73,7 @@ export const imagePath = {
     gallery2,
     gallery3,
     gallery4,
-    // image1,
+    image1,
     logoCocaCola,
     logoGodrej,
     logoOppo,
