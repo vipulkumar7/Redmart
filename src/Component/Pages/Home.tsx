@@ -100,9 +100,10 @@ const Home: React.FC = () => {
                                     className='home_img'
                                     src={imagePath.image}
                                     alt="image1.jpeg"
-                                    loading="lazy"
-                                // width={'640px'}
-                                // height={'652px'}
+                                    loading="eager"
+                                    width='652px'
+                                    height='640px'
+                                    fetchPriority='high'
                                 />
                             </div>
                         </div>
@@ -118,6 +119,8 @@ const Home: React.FC = () => {
                                     src={imagePath.category1}
                                     alt="category-1"
                                     loading="lazy"
+                                    width='320px'
+                                    height='350px'
                                 />
                             </div>
                             <div className="col_3">
@@ -125,6 +128,8 @@ const Home: React.FC = () => {
                                     src={imagePath.category2}
                                     alt="category-2"
                                     loading="lazy"
+                                    width='320px'
+                                    height='350px'
                                 />
                             </div>
                             <div className="col_3">
@@ -132,6 +137,8 @@ const Home: React.FC = () => {
                                     src={imagePath.category3}
                                     alt="category-3"
                                     loading="lazy"
+                                    width='320px'
+                                    height='350px'
                                 />
                             </div>
                         </div>
@@ -273,6 +280,8 @@ const Home: React.FC = () => {
                                         src={exclusiveProduct?.image}
                                         alt="exclusive"
                                         className="offer-img"
+                                        width='430px'
+                                        height='575px'
                                         loading="lazy"
                                     />
                                 </div>

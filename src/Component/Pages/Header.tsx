@@ -60,6 +60,7 @@ const Header: React.FC = () => {
                             src={imagePath.logo}
                             alt="logo"
                             width="125px"
+                            height='36px'
                             onClick={() => {
                                 navigate('/')
                             }}
