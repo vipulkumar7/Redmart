@@ -1,0 +1,1 @@
+import{r as l,t as n,j as p,s as x}from"./index-mFqidmet.js";const f=l.forwardRef(({bsPrefix:o,className:r,role:s="toolbar",...t},a)=>{const e=n(o,"btn-toolbar");return p.jsx("div",{...t,ref:a,className:x(r,e),role:s})});f.displayName="ButtonToolbar";export{f as B};

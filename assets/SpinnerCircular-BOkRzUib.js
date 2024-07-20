@@ -1,0 +1,14 @@
+import{R as i}from"./index-mFqidmet.js";/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */var a=function(){return a=Object.assign||function(o){for(var n,r=1,t=arguments.length;r<t;r++){n=arguments[r];for(var s in n)Object.prototype.hasOwnProperty.call(n,s)&&(o[s]=n[s])}return o},a.apply(this,arguments)};function d(e,o){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&o.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var t=0,r=Object.getOwnPropertySymbols(e);t<r.length;t++)o.indexOf(r[t])<0&&Object.prototype.propertyIsEnumerable.call(e,r[t])&&(n[r[t]]=e[r[t]]);return n}var y={color:"#38ad48",enabled:!0,size:50,style:{}},p=function(e){return parseFloat(e.toString()).toString()===e.toString()?e+"px":e.toString()},h=function(e){var o=function(n){var r=n.color,t=n.enabled,s=n.size,l=n.style,c=d(n,["color","enabled","size","style"]),u=a(a({},c),{style:a({color:r,overflow:"visible",width:p(s)},l)});return t?i.createElement(e,a({},u)):null};return o.defaultProps=y,o},v={speed:100,still:!1,thickness:100},m=a(a({},v),{secondaryColor:"rgba(0,0,0,0.44)"});function g(e,o){o===void 0&&(o={});var n=o.insertAt;if(!(typeof document>"u")){var r=document.head||document.getElementsByTagName("head")[0],t=document.createElement("style");t.type="text/css",n==="top"&&r.firstChild?r.insertBefore(t,r.firstChild):r.appendChild(t),t.styleSheet?t.styleSheet.cssText=e:t.appendChild(document.createTextNode(e))}}var k="@keyframes spinners-react-circular{0%{stroke-dashoffset:306}50%{stroke-dasharray:40,134}to{stroke-dasharray:1,174;stroke-dashoffset:132}}";g(k);var f=function(e){var o=e.secondaryColor,n=e.speed,r=e.still,t=e.thickness,s=d(e,["secondaryColor","speed","still","thickness"]),l=4*(t/100),c=r?{}:{animation:"spinners-react-circular "+140/n+"s linear infinite"};return i.createElement("svg",a({fill:"none"},s,{viewBox:"0 0 66 66"}),i.createElement("circle",{cx:"33",cy:"33",fill:"none",r:"28",stroke:o,strokeWidth:l}),i.createElement("circle",{cx:"33",cy:"33",fill:"none",r:"28",stroke:"currentColor",strokeDasharray:"1, 174",strokeDashoffset:"306",strokeLinecap:"round",strokeWidth:l,style:c}))};f.defaultProps=m;var C=h(f);export{C as S};

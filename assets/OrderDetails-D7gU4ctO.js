@@ -1,0 +1,1 @@
+import{p as e,g as r,r as i,j as s,H as c,e as n}from"./index-mFqidmet.js";import{b as d}from"./actions-BjvnXCut.js";import{u as p}from"./useDispatch-BmuRceBY.js";const x=()=>{const t=p(),o=e(),{id:a}=r();return console.log(o.state,"location"),i.useEffect(()=>{t(d(a))},[]),s.jsxs("div",{id:"page-container",children:[s.jsx(c,{}),s.jsx(n,{})]})};export{x as default};
