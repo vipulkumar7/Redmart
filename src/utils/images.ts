@@ -43,8 +43,7 @@ import gallery1 from '../assets/images/gallery-1.jpg'
 import gallery2 from '../assets/images/gallery-2.jpg'
 import gallery3 from '../assets/images/gallery-3.jpg'
 import gallery4 from '../assets/images/gallery-4.jpg'
-import image from '../assets/images/image1.png'
-import image1 from '../assets/images/image.jpeg'
+import image from '../assets/images/image.jpeg'
 import logoCocaCola from '../assets/images/logo-coca-cola.png'
 import logoGodrej from '../assets/images/logo-godrej.png'
 import logoOppo from '../assets/images/logo-oppo.png'
@@ -53,9 +52,6 @@ import logoPhilips from '../assets/images/logo-philips.png'
 import logoWhite from '../assets/images/logo-white.png'
 import playStore from '../assets/images/play-store.png'
 import loader from '../assets/images/loader.gif'
-import loader1 from '../assets/images/loader1.gif'
-import loader2 from '../assets/images/loader2.gif'
-import loader3 from '../assets/images/loader3.gif'
 import personal_info from '../assets/images/personal_info.png'
 export const imagePath = {
     logo,
@@ -73,7 +69,6 @@ export const imagePath = {
     gallery2,
     gallery3,
     gallery4,
-    image1,
     logoCocaCola,
     logoGodrej,
     logoOppo,
@@ -82,9 +77,6 @@ export const imagePath = {
     logoWhite,
     playStore,
     loader,
-    loader1,
-    loader2,
-    loader3,
     personal_info,
     image,
 }

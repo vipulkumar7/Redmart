@@ -98,7 +98,7 @@ const Home: React.FC = () => {
                             <div className="col_2">
                                 <img
                                     className='home_img'
-                                    src={imagePath.image1}
+                                    src={imagePath.image}
                                     alt="image1.jpeg"
                                     loading="eager"
                                     width='640px'
