@@ -101,8 +101,8 @@ const Home: React.FC = () => {
                                     src={imagePath.image}
                                     alt="image1.jpeg"
                                     loading="eager"
-                                    width='652px'
-                                    height='640px'
+                                    width='640px'
+                                    height='652px'
                                     fetchPriority='high'
                                 />
                             </div>
