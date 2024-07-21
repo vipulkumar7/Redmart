@@ -9,6 +9,8 @@ import {
     faStar,
     faStarHalfAlt,
 } from '@fortawesome/free-solid-svg-icons'
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Footer from './Footer'
 import Header from './Header'
 import { imagePath } from '../../utils/images'
@@ -96,14 +98,15 @@ const Home: React.FC = () => {
                                 </NavLink>
                             </div>
                             <div className="col_2">
-                                <img
+                                <LazyLoadImage
                                     className='home_img'
                                     src={imagePath.image}
                                     alt="image1.jpeg"
-                                    loading="eager"
+                                    // loading="eager"
                                     width='640px'
                                     height='652px'
-                                    fetchPriority='high'
+                                    // fetchPriority='high'
+                                    effect="blur"
                                 />
                             </div>
                         </div>
@@ -115,30 +118,30 @@ const Home: React.FC = () => {
                     <div className="small-container">
                         <div className="row">
                             <div className="col_3">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.category1}
                                     alt="category-1"
-                                    loading="lazy"
                                     width='320px'
                                     height='350px'
+                                    effect="blur"
                                 />
                             </div>
                             <div className="col_3">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.category2}
                                     alt="category-2"
-                                    loading="lazy"
                                     width='320px'
                                     height='350px'
+                                    effect="blur"
                                 />
                             </div>
                             <div className="col_3">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.category3}
                                     alt="category-3"
-                                    loading="lazy"
                                     width='320px'
                                     height='350px'
+                                    effect="blur"
                                 />
                             </div>
                         </div>
@@ -150,55 +153,55 @@ const Home: React.FC = () => {
                 <div className="small-container">
                     <h2 className="title">Featured Products</h2>
                     {
-                    // productSpinner ? (
-                    //     <Loader />
-                    // ) : 
-                    (
-                        <div className="row">
-                            {featureProductData?.map((product) => (
-                                <div
-                                    className="col_4"
-                                    key={product.id}
-                                    onClick={() => {
-                                        onClickProductDetails(product.id)
-                                    }}
-                                >
-                                    <NavLink to="/product-details">
-                                        <img
-                                            src={product.image}
-                                            alt="product-1"
-                                            width="230px"
-                                            height="300px"
-                                            loading="lazy"
-                                        />
-                                    </NavLink>
-                                    <NavLink to="/product-details">
-                                        <h4>{product.title}</h4>
-                                    </NavLink>
-                                    <div className="rating">
-                                        {filledStar(product).map(
-                                            (_it, index) => (
+                        // productSpinner ? (
+                        //     <Loader />
+                        // ) : 
+                        (
+                            <div className="row">
+                                {featureProductData?.map((product) => (
+                                    <div
+                                        className="col_4"
+                                        key={product.id}
+                                        onClick={() => {
+                                            onClickProductDetails(product.id)
+                                        }}
+                                    >
+                                        <NavLink to="/product-details">
+                                            <LazyLoadImage
+                                                src={product.image}
+                                                alt="product-1"
+                                                width="230px"
+                                                height="300px"
+                                                effect="blur"
+                                            />
+                                        </NavLink>
+                                        <NavLink to="/product-details">
+                                            <h4>{product.title}</h4>
+                                        </NavLink>
+                                        <div className="rating">
+                                            {filledStar(product).map(
+                                                (_it, index) => (
+                                                    <FontAwesomeIcon
+                                                        icon={faStar}
+                                                        key={index}
+                                                    />
+                                                )
+                                            )}
+                                            {emptyStar(product).map((_it, index) => (
                                                 <FontAwesomeIcon
-                                                    icon={faStar}
+                                                    icon={faStarHalfAlt}
                                                     key={index}
                                                 />
-                                            )
-                                        )}
-                                        {emptyStar(product).map((_it, index) => (
-                                            <FontAwesomeIcon
-                                                icon={faStarHalfAlt}
-                                                key={index}
-                                            />
-                                        ))}
+                                            ))}
+                                        </div>
+                                        <p>
+                                            <FontAwesomeIcon icon={faRupeeSign} />{' '}
+                                            {product.price}
+                                        </p>
                                     </div>
-                                    <p>
-                                        <FontAwesomeIcon icon={faRupeeSign} />{' '}
-                                        {product.price}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        )}
                 </div>
 
                 {/* Featured Products End */}
@@ -225,12 +228,12 @@ const Home: React.FC = () => {
                                         onClickProductDetails(product.id)
                                     }}
                                 >
-                                    <img
+                                    <LazyLoadImage
                                         src={product.image}
                                         alt="product-5"
                                         width="230px"
                                         height="300px"
-                                        loading="lazy"
+                                        effect="blur"
                                     />
                                     <h4>{product.title}</h4>
                                     <div className="rating">
@@ -276,13 +279,13 @@ const Home: React.FC = () => {
                         ) : (
                             <div className="row">
                                 <div className="col_2">
-                                    <img
+                                    <LazyLoadImage
                                         src={exclusiveProduct?.image}
                                         alt="exclusive"
                                         className="offer-img"
                                         width='430px'
                                         height='575px'
-                                        loading="lazy"
+                                        effect="blur"
                                     />
                                 </div>
                                 <div className="col_2">
@@ -331,10 +334,10 @@ const Home: React.FC = () => {
                                         <FontAwesomeIcon icon={faStar} />
                                         <FontAwesomeIcon icon={faStarHalfAlt} />
                                     </div>
-                                    <img
+                                    <LazyLoadImage
                                         src={item.image}
                                         alt="user-1"
-                                        loading="lazy"
+                                        effect="blur"
                                     />
                                     <h3>{item.name}</h3>
                                 </div>
@@ -350,31 +353,31 @@ const Home: React.FC = () => {
                     <div className="small-container">
                         <div className="row">
                             <div className="col_5">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.logoGodrej}
                                     alt="logo-godrej"
-                                    loading="lazy"
+                                    effect="blur"
                                 />
                             </div>
                             <div className="col_5">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.logoOppo}
                                     alt="logo-oppo"
-                                    loading="lazy"
+                                    effect="blur"
                                 />
                             </div>
                             <div className="col_5">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.logoCocaCola}
                                     alt="logo-coca-cola"
-                                    loading="lazy"
+                                    effect="blur"
                                 />
                             </div>
                             <div className="col_5">
-                                <img
+                                <LazyLoadImage
                                     src={imagePath.logoPaypal}
                                     alt="logo-paypal"
-                                    loading="lazy"
+                                    effect="blur"
                                 />
                             </div>
                         </div>
