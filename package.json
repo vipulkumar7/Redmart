@@ -48,7 +48,6 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.1.1",
     "react-dom": "^18.3.1",
-    "react-lazy-load-image-component": "^1.6.2",
     "react-paginate": "^8.0.3",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
@@ -68,7 +67,6 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@types/react-lazy-load-image-component": "^1.6.4",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",
