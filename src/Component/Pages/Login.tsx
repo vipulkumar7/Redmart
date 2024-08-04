@@ -53,7 +53,8 @@ const Login: React.FC = () => {
         if (!isSigningIn) {
             setIsSigningIn(true);
             doSignInWithGoogle()
-                .catch((e: any) => {
+                .catch((err: any) => {
+                    console.log(err)
                     setIsSigningIn(false);
                 });
         }

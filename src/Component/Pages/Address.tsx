@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import ButtonToolbar from 'react-bootstrap/esm/ButtonToolbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAddress, getAddress } from '../../redux/address/actions'
+import { getAddress } from '../../redux/address/actions'
 import { RootState } from '../../redux/rootReducer'
 // import FormModal from '../modals/FormModal'
 import { AxiosHeaders, IAddress } from '../Types'
@@ -58,7 +58,8 @@ const Address: React.FC = () => {
     // }
 
     const handleDeleteAddress = (id: number) => {
-        dispatch(deleteAddress(id))
+        console.log(id)
+        // dispatch(deleteAddress(id))
         dispatch(getAddress(headers))
     }
 

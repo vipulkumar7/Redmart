@@ -26,7 +26,6 @@ import {
 import { filledStar, emptyStar, getCookie } from '../../commonFunction'
 import { getCart } from '../../redux/cart/actions'
 import { getOrders } from '../../redux/orders/actions'
-import { getAddress } from '../../redux/address/actions'
 
 const Home: React.FC = () => {
     const dispatch = useDispatch()

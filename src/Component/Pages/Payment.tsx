@@ -5,11 +5,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../axiosInstance'
 import swal from 'sweetalert'
-import { useNavigate, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Form from 'react-bootstrap/Form'
-import { postOrders } from '../../redux/orders/actions'
 import { RootState } from '../../redux/rootReducer'
 import { deleteAllCart } from '../../redux/cart/actions'
 import { ReduxData } from '../Types'
@@ -17,7 +15,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 const Payment: React.FC = () => {
-    const location: any = useLocation()
     const dispatch = useDispatch()
 
     const cartData: ReduxData[] = useSelector(
@@ -31,7 +28,6 @@ const Payment: React.FC = () => {
     const [, setSuccess] = useState<boolean>(false)
     const stripe: any = useStripe()
     const elements: any = useElements()
-    const navigate = useNavigate()
 
     const CARD_OPTIONS: any = {
         iconStyle: 'solid',
