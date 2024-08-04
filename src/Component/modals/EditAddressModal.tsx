@@ -45,15 +45,15 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
 
   const userId: any = getCookie("userId")
   const headers: AxiosHeaders = {
-      'Authorization': getCookie('authToken'),
-      "userId": userId
+    'Authorization': getCookie('authToken'),
+    "userId": userId
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
     const updatedAddress = { name, mobile, fullAddress, pincode, city, state, _id };
-    dispatch(updateAddress(updatedAddress, _id, headers ));
+    dispatch(updateAddress(updatedAddress, _id, headers));
     console.log(updatedAddress, '1234545')
     handleSave(updatedAddress);
     handleEditClose(); // Close modal after submission
@@ -72,7 +72,14 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              // onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                if (
+                  e.target.value.match('^[a-zA-Z ]*$') !==
+                  null
+                )
+                  setName(e.target.value)
+              }}
               required
             />
           </Form.Group>
@@ -82,7 +89,11 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter mobile number"
               value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
+              // onChange={(e) => setMobile(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.match('^[0-9]*$') !== null)
+                  setMobile(e.target.value)
+              }}
               required
             />
           </Form.Group>
@@ -92,7 +103,10 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter full address"
               value={fullAddress}
-              onChange={(e) => setFullAddress(e.target.value)}
+              // onChange={(e) => setFullAddress(e.target.value)}
+              onChange={(e) =>
+                setFullAddress(e.target.value)
+              }
               required
             />
           </Form.Group>
@@ -102,7 +116,11 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter pincode"
               value={pincode}
-              onChange={(e) => setPincode(e.target.value)}
+              // onChange={(e) => setPincode(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.match('^[0-9]*$') !== null)
+                  setPincode(e.target.value)
+              }}
               required
             />
           </Form.Group>
@@ -112,7 +130,14 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter city"
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              // onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => {
+                if (
+                  e.target.value.match('^[a-zA-Z ]*$') !==
+                  null
+                )
+                  setCity(e.target.value)
+              }}
               required
             />
           </Form.Group>
@@ -122,7 +147,14 @@ const EditAddressModal: React.FC<EditAddressModalProps> = ({ show, handleEditClo
               type="text"
               placeholder="Enter state"
               value={state}
-              onChange={(e) => setState(e.target.value)}
+              // onChange={(e) => setState(e.target.value)}
+              onChange={(e) => {
+                if (
+                  e.target.value.match('^[a-zA-Z ]*$') !==
+                  null
+                )
+                  setState(e.target.value)
+              }}
               required
             />
           </Form.Group>

@@ -6,8 +6,9 @@ import Loader from './Component/Loader'
 import Profile from './Component/Pages/Profile'
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-// import PrivateRoute from './routing/PrivateRoute'
 import { AuthProvider } from "./contexts/authContext";
+import PaymentSuccessPage from './Component/Pages/PaymentSuccessPage'
+import PaymentFailedPage from './Component/Pages/PaymentFailedPage'
 
 const Home = lazy(() => import('./Component/Pages/Home'))
 const Products = lazy(() => import('./Component/Pages/Products'))
@@ -52,6 +53,8 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/success" element={<PaymentSuccessPage />} />
+            <Route path="/cancel" element={<PaymentFailedPage />} />
             <Route path="*" element={<NoPageFound />} />
           </Routes>
           <Analytics />

@@ -19,6 +19,7 @@ const API_ENDPOINTS = {
   getAdress: `${API_BASE_URL}/get-address`,
   editAdress: `${API_BASE_URL}/update-address`,
   deleteAdress: `${API_BASE_URL}/delete-address`,
+  createCheckoutsession: `${API_BASE_URL}/create-checkout-session`,
   // Add more endpoints as needed
 };
 
