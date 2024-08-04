@@ -2,75 +2,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Footer from './Footer'
 import Header from './Header'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-// import FormModal from '../modals/FormModal'
-import { IAddress } from '../Types'
+import { AddressProps, AxiosHeaders } from '../Types'
 import { RootState } from '../../redux/rootReducer'
 import { deleteAddress, getAddress } from '../../redux/address/actions'
+import { getCookie } from '../../commonFunction'
+import AddAddressModal from '../modals/AddAddressModal'
+import EditAddressModal from '../modals/EditAddressModal'
 // import UpdateAddress from './UpdateAddress'
 
 const Checkout: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const location = useLocation()
 
-    const paymentData = location.state
+    const [showAddModal, setShowAddModal] = useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
-    const addressData: IAddress[] = useSelector(
+    const addressData: AddressProps[] = useSelector(
         (state: RootState) => state.addressReducer.addressData
     )
-    const [_addModalShow, setAddModalShow] = useState<boolean>(false)
-    const [_updateModalShow, setUpdateModalShow] = useState<boolean>(false)
-    const [_editData, setEditData] = useState<IAddress>({
-        name: '',
-        mobile: '',
-        fullAddress: '',
-        pincode: '',
-        city: '',
-        state: '',
-        id: 0,
-    })
-    const [cardSelect, setCardSelect] = useState<number>(
-        addressData.length > 0 ? addressData[0].id : 0
-    )
+    const handleEditShow = () => setShowEditModal(true);
+    const handleAddShow = () => setShowAddModal(true);
 
-    useEffect(() => {
-        dispatch(getAddress())
-    }, [])
+    const handleAddClose = () => setShowAddModal(false);
+    const handleEditClose = () => setShowEditModal(false);
 
-    // const addModalClose = () => {
-    //     setAddModalShow(false)
-    // }
+    const handleSave = (updatedAddress: AddressProps) => {
+        console.log('Updated Address:', updatedAddress);
+    };
 
-    // const updateModalClose = () => {
-    //     setUpdateModalShow(false)
-    // }
-
-    const handleDeleteAddress = (id: number) => {
-        dispatch(deleteAddress(id))
-        dispatch(getAddress())
+    const userId: any = getCookie("userId")
+    const headers: AxiosHeaders = {
+        'Authorization': getCookie('authToken'),
+        "userId": userId
     }
 
-    const handleAddress = (e: any) => {
-        setCardSelect(parseInt(e.target.value))
+    useEffect(() => {
+        dispatch(getAddress(headers))
+    }, [])
+
+    const handleDeleteAddress = (id: string | undefined) => {
+        dispatch(deleteAddress(id as any, headers));
     }
 
     const handlePayment = () => {
-        const filteredAddress = addressData.filter((item) => {
-            if (item.id === cardSelect) return item
-        })[0]
-        navigate('/payment', { state: { paymentData, filteredAddress } })
+        // const filteredAddress = addressData.filter((item) => {
+        //     if (item.id === cardSelect) return item
+        // })[0]
+        navigate('/payment')
     }
 
-    const handleEditAddress = (item: IAddress) => {
-        setEditData(item)
-        setUpdateModalShow(true)
-    }
 
     return (
         <div id="page-container">
@@ -78,47 +64,35 @@ const Checkout: React.FC = () => {
             <div className="small-container cart-page" id="content-wrap">
                 <div className="row row-2-address">
                     <h3>
-                        {addressData.length !== 0
+                        {addressData?.length !== 0
                             ? 'Select Address'
                             : 'Please add your address'}
                     </h3>
                     <ButtonToolbar>
                         <button
                             className="btn1"
-                            onClick={() => {
-                                setAddModalShow(true)
-                            }}
+                            onClick={handleAddShow}
                         >
                             Add Address
                         </button>
-                        {/* <FormModal show={addModalShow} onHide={addModalClose} /> */}
                     </ButtonToolbar>
+                    <AddAddressModal show={showAddModal} handleAddClose={handleAddClose} />
                 </div>
                 <div>
-                    {addressData.map((item, index) => (
-                        <div
-                            key={item.id}
-                            onChange={(e) => {
-                                handleAddress(e)
-                            }}
-                            className={
-                                cardSelect === item.id
-                                    ? 'card-border radio-btn'
-                                    : 'radio-btn'
-                            }
-                        >
+                    {addressData?.map((item, index) => (
+                        <div key={item._id}>
                             <div>
                                 <input
                                     type="radio"
-                                    id={item.id.toString()}
+                                    id={item._id}
                                     name="address"
-                                    value={item.id}
+                                    value={item._id}
                                     defaultChecked={index === 0}
                                     className="margin20"
                                 />
                             </div>
                             <label
-                                htmlFor={item.id.toString()}
+                                htmlFor={item._id}
                                 className="cursor"
                             >
                                 <div>
@@ -133,7 +107,7 @@ const Checkout: React.FC = () => {
                                             <span
                                                 className="btn-remove cursor"
                                                 onClick={() => {
-                                                    handleDeleteAddress(item.id)
+                                                    handleDeleteAddress(item._id)
                                                 }}
                                             >
                                                 &nbsp; &nbsp;
@@ -143,19 +117,18 @@ const Checkout: React.FC = () => {
                                             </span>
                                             <span
                                                 className="btn-remove cursor"
-                                                onClick={() => {
-                                                    handleEditAddress(item)
-                                                }}
+                                                onClick={handleEditShow}
                                             >
                                                 <FontAwesomeIcon
                                                     icon={faEdit}
                                                 />
                                             </span>
-                                            {/* <UpdateAddress
-                                                show={updateModalShow}
-                                                onHide={updateModalClose}
-                                                editdata={editData}
-                                            /> */}
+                                            <EditAddressModal
+                                                show={showEditModal}
+                                                handleEditClose={handleEditClose}
+                                                address={item}
+                                                handleSave={handleSave}
+                                            />
                                         </div>
                                         <div>
                                             {item.fullAddress} , {item.city}
@@ -176,7 +149,7 @@ const Checkout: React.FC = () => {
                     onClick={() => {
                         handlePayment()
                     }}
-                    disabled={addressData.length === 0 ? true : false}
+                    disabled={addressData?.length === 0 ? true : false}
                 >
                     Go to Payment
                 </button>

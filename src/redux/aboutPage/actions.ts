@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ActionType } from './types'
 import { Dispatch } from 'redux'
 import { IPosts, RandomData } from '../../Component/Types'
@@ -30,7 +31,7 @@ export const setRandomData = (data: RandomData[]) => {
 export const getRandomData = () => (dispatch: Dispatch) => {
     dispatch(setSpinner(true))
     axiosInstance
-        .get(`https://redmart-products.onrender.com/randomData`)
+        ?.get(`https://redmart-products.onrender.com/randomData`)
         .then((response) => {
             dispatch(setRandomData(response.data))
             dispatch(setSpinner(false))
@@ -62,7 +63,7 @@ export const getPostsSuccess = (posts: IPosts[]) => {
 }
 
 export function* workGetPostsFetch(): any {
-    yield axiosInstance.get(`https://jsonplaceholder.typicode.com/posts`)
+    yield axiosInstance?.get(`https://jsonplaceholder.typicode.com/posts`)
         .then((response) => {
             getPostsSuccess(response.data)
         })

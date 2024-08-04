@@ -20,14 +20,14 @@ import {
     getRelatedProducts,
 } from '../../redux/productPage/actions'
 // import Loader from '../Loader'
-import { ReduxData } from '../Types'
-import { filledStar, emptyStar } from '../../commonFunction'
+import { AxiosHeaders, ReduxData } from '../Types'
+import { filledStar, emptyStar, getCookie } from '../../commonFunction'
 import { postCart } from '../../redux/cart/actions'
 
 const ProductDetails: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { id } = useParams<{ id: any }>()
+    const { id } = useParams<{ id: any }>();
 
     useDocumentTitle('Product Details')
     const [quantity, setQuantity] = useState<number>(1)
@@ -47,14 +47,21 @@ const ProductDetails: React.FC = () => {
         (state: RootState) => state.cartReducer1.cartData
     )
 
+    const userId = getCookie("userId");
+
+    const headers: AxiosHeaders = {
+        'Authorization': getCookie('authToken'),
+        "userId": userId
+    }
+
     useEffect(() => {
         dispatch(getProductDescription(id!))
-        dispatch(getRelatedProducts())
+        dispatch(getRelatedProducts(id!))
     }, [dispatch, id])
 
     useEffect(() => {
         cartData.filter((item) => {
-            if (item.id === parseInt(id)) return setFlag(true)
+            if (item._id === parseInt(id)) return setFlag(true)
         })
     }, [])
 
@@ -69,7 +76,7 @@ const ProductDetails: React.FC = () => {
         productDescData.quantity = quantity
         productDescData.size = size
         if (!flag) {
-            size && dispatch(postCart(productDescData))
+            size && dispatch(postCart(productDescData, headers, userId as string))
         }
         size && navigate('/cart')
     }
@@ -139,7 +146,7 @@ const ProductDetails: React.FC = () => {
                                                 : `btn1 ${!flag ? 'opacity' : ''}`
                                         }
                                         onClick={() => {
-                                            onClickAddToCart(productDescData)
+                                            userId && onClickAddToCart(productDescData)
                                         }}
                                         data-tip
                                         data-for={!flag ? 'selectSize' : ''}
@@ -209,9 +216,9 @@ const ProductDetails: React.FC = () => {
                             {relatedProducts.map((product) => (
                                 <div
                                     className="col_4"
-                                    key={product.id}
+                                    key={product._id}
                                     onClick={() => {
-                                        onClickProductDetails(product.id)
+                                        onClickProductDetails(product._id)
                                     }}
                                 >
                                     <img

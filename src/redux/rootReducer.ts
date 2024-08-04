@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { combineReducers } from 'redux'
-import storage from 'redux-persist/lib/storage'
 import authReducer from './auth/reducer'
 import productReducer from './productPage/reducer'
 import aboutReducer from './aboutPage/reducer'
@@ -20,9 +20,8 @@ const appReducer = combineReducers({
     cartReducer1,
 })
 
-const rootReducer = (state: any, action: Action) => {
+const rootReducer: any = (state: any, action: Action) => {
     if (action.type === ActionType.SIGN_OUT) {
-        storage.removeItem('persist:root')
         return appReducer(undefined, action)
     }
     return appReducer(state, action)

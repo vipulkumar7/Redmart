@@ -15,7 +15,6 @@ import {
     getSearchProduct,
 } from '../../redux/productPage/actions'
 import { useDocumentTitle } from '../setDocumentTitle'
-// import Loader from '../Loader'
 import { RootState } from '../../redux/rootReducer'
 import { ISort, OnPageChangeCallback, ReduxData } from '../Types'
 import { filledStar, emptyStar } from '../../commonFunction'
@@ -24,11 +23,6 @@ const Products: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useDocumentTitle('Products')
-
-    // const productSpinner: boolean = useSelector(
-    //     (state: RootState) => state.productReducer.productSpinner
-    // )
-    // const items: ReduxData[] = useSelector((state: RootState) => state.productReducer.productAllData);
     const serachProduct: ReduxData[] = useSelector(
         (state: RootState) => state.productReducer.serachProduct
     )
@@ -140,9 +134,9 @@ const Products: React.FC = () => {
                             currentItems.map((item) => (
                                 <div
                                     className="col_4"
-                                    key={item.id}
+                                    key={item._id}
                                     onClick={() => {
-                                        navigate(`/product/${item.id}`)
+                                        navigate(`/product/${item._id}`)
                                     }}
                                 >
                                     <img

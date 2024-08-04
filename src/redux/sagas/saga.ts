@@ -5,7 +5,7 @@ import { ActionType } from '../aboutPage/types';
 
 // function* workGetPostsFetch(): any {
 //     // const response = yield call(fetch, 'https://jsonplaceholder.typicode.com/posts');
-//     const response = yield axiosInstance.get('https://jsonplaceholder.typicode.com/posts')
+//     const response = yield axiosInstance?.get('https://jsonplaceholder.typicode.com/posts')
 //     .then((result=> getPostsSuccess(result.data)))
 //     // const posts = yield response.json();
 //     // yield put(getPostsSuccess(posts));

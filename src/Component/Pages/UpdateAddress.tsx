@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import { useDispatch } from 'react-redux'
-import { getAddress, updateAddress } from '../../redux/address/actions'
+// import { useDispatch } from 'react-redux'
+// import { updateAddress } from '../../redux/address/actions'
 import { IAddress } from '../Types'
 
 const UpdateAddress: React.FC = (props: any) => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const currentAddress: IAddress = props.editdata
     const [address, setAddress] = useState(currentAddress)
 
@@ -17,9 +17,9 @@ const UpdateAddress: React.FC = (props: any) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        dispatch(updateAddress(address, props.editdata.id))
+        // dispatch(updateAddress(address, props.editdata.id))
         props.onHide()
-        dispatch(getAddress())
+        // dispatch(getAddress())
     }
 
     return (

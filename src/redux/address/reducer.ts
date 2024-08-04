@@ -1,10 +1,10 @@
-import { IAddress, IPostOffice } from './../../Component/Types'
+import { AddressProps, IPostOffice } from './../../Component/Types'
 import { Action } from './actions'
 import { ActionType } from './types'
 
 interface AddressState {
     spinner: boolean
-    addressData: IAddress[]
+    addressData: AddressProps[]
     postOffices: IPostOffice
 }
 

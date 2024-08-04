@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -12,10 +13,9 @@ import {
 import Footer from './Footer'
 import Header from './Header'
 import { imagePath } from '../../utils/images'
-// import Loader from '../Loader'
 import { RootState } from '../../redux/rootReducer'
 import { useDocumentTitle } from '../setDocumentTitle'
-import { QuotesReduxData, ReduxData } from '../Types'
+import { AxiosHeaders, QuotesReduxData, ReduxData } from '../Types'
 import {
     getAllProduct,
     getFeaturedProduct,
@@ -23,10 +23,9 @@ import {
     getExclusiveProduct,
     getQuotes,
 } from '../../redux/productPage/actions'
-import { filledStar, emptyStar } from '../../commonFunction'
-import { getCart, postCart } from '../../redux/cart/actions'
+import { filledStar, emptyStar, getCookie } from '../../commonFunction'
+import { getCart } from '../../redux/cart/actions'
 import { getOrders } from '../../redux/orders/actions'
-import { getAddress } from '../../redux/address/actions'
 
 const Home: React.FC = () => {
     const dispatch = useDispatch()
@@ -44,10 +43,16 @@ const Home: React.FC = () => {
     )
     const exclusiveProduct: ReduxData = useSelector(
         (state: RootState) => state.productReducer.exclusiveProduct
-    )
+    );
     const quotes: QuotesReduxData[] = useSelector(
         (state: RootState) => state.productReducer.quotes
-    )
+    );
+
+    const userId: any = getCookie("userId")
+    const headers: AxiosHeaders = {
+        'Authorization': getCookie('authToken'),
+        "userId": userId
+    }
 
     useEffect(() => {
         dispatch(getAllProduct())
@@ -55,22 +60,19 @@ const Home: React.FC = () => {
         dispatch(getLatestProduct())
         dispatch(getExclusiveProduct())
         dispatch(getQuotes())
-        dispatch(getCart())
+        userId && dispatch(getCart(headers))
         dispatch(getOrders())
-        dispatch(getAddress())
+        // userId && dispatch(getAddress(headers))
     }, [dispatch])
 
     const onClickProductDetails = (productID: number) => {
         navigate(`/product/${productID}`)
     }
 
-    const onClickAddToCart = (
-        _e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-        productDescData: ReduxData
-    ) => {
-        exclusiveProduct.quantity = 1
-        dispatch(postCart(productDescData))
+    const onClickAddToCart = (id: number) => {
+        navigate(`/product/${id}`)
     }
+
     return (
         <div id="page-container">
             <Header />
@@ -103,7 +105,6 @@ const Home: React.FC = () => {
                                     loading="eager"
                                     width='640px'
                                     height='652px'
-                                    fetchPriority='high'
                                 />
                             </div>
                         </div>
@@ -150,20 +151,19 @@ const Home: React.FC = () => {
                 <div className="small-container">
                     <h2 className="title">Featured Products</h2>
                     {
-                    // productSpinner ? (
-                    //     <Loader />
-                    // ) : 
-                    (
-                        <div className="row">
-                            {featureProductData?.map((product) => (
-                                <div
-                                    className="col_4"
-                                    key={product.id}
-                                    onClick={() => {
-                                        onClickProductDetails(product.id)
-                                    }}
-                                >
-                                    <NavLink to="/product-details">
+                        // productSpinner ? (
+                        //     <Loader />
+                        // ) : 
+                        (
+                            <div className="row">
+                                {featureProductData?.map((product) => (
+                                    <div
+                                        className="col_4"
+                                        key={product._id}
+                                        onClick={() => {
+                                            onClickProductDetails(product._id)
+                                        }}
+                                    >
                                         <img
                                             src={product.image}
                                             alt="product-1"
@@ -171,34 +171,31 @@ const Home: React.FC = () => {
                                             height="300px"
                                             loading="lazy"
                                         />
-                                    </NavLink>
-                                    <NavLink to="/product-details">
                                         <h4>{product.title}</h4>
-                                    </NavLink>
-                                    <div className="rating">
-                                        {filledStar(product).map(
-                                            (_it, index) => (
+                                        <div className="rating">
+                                            {filledStar(product).map(
+                                                (_it, index) => (
+                                                    <FontAwesomeIcon
+                                                        icon={faStar}
+                                                        key={index}
+                                                    />
+                                                )
+                                            )}
+                                            {emptyStar(product).map((_it, index) => (
                                                 <FontAwesomeIcon
-                                                    icon={faStar}
+                                                    icon={faStarHalfAlt}
                                                     key={index}
                                                 />
-                                            )
-                                        )}
-                                        {emptyStar(product).map((_it, index) => (
-                                            <FontAwesomeIcon
-                                                icon={faStarHalfAlt}
-                                                key={index}
-                                            />
-                                        ))}
+                                            ))}
+                                        </div>
+                                        <p>
+                                            <FontAwesomeIcon icon={faRupeeSign} />{' '}
+                                            {product.price}
+                                        </p>
                                     </div>
-                                    <p>
-                                        <FontAwesomeIcon icon={faRupeeSign} />{' '}
-                                        {product.price}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        )}
                 </div>
 
                 {/* Featured Products End */}
@@ -220,9 +217,9 @@ const Home: React.FC = () => {
                             {latestProductData.map((product) => (
                                 <div
                                     className="col_4"
-                                    key={product.id}
+                                    key={product._id}
                                     onClick={() => {
-                                        onClickProductDetails(product.id)
+                                        onClickProductDetails(product._id)
                                     }}
                                 >
                                     <img
@@ -292,18 +289,12 @@ const Home: React.FC = () => {
                                         {exclusiveProduct?.description}
                                     </small>
                                     <div>
-                                        <NavLink
-                                            to="/cart"
+                                        <button
                                             className="btn1"
-                                            onClick={(e) => {
-                                                onClickAddToCart(
-                                                    e,
-                                                    exclusiveProduct
-                                                )
-                                            }}
+                                            onClick={() => onClickAddToCart(exclusiveProduct._id)}
                                         >
                                             Buy Now &#8594;
-                                        </NavLink>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -318,7 +309,7 @@ const Home: React.FC = () => {
                     <div className="small-container">
                         <div className="row">
                             {quotes.map((item) => (
-                                <div className="col_3" key={item.id}>
+                                <div className="col_3" key={item._id}>
                                     <FontAwesomeIcon
                                         icon={faQuoteLeft}
                                         className="fa-quote-left"

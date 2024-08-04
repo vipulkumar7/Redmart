@@ -19,6 +19,7 @@ const initialState = {
     productAllData: [],
     productDescData: {
         id: 0,
+        _id: 0,
         title: '',
         brand: '',
         price: 0,
@@ -37,6 +38,7 @@ const initialState = {
     latestProductData: [],
     exclusiveProduct: {
         id: 0,
+        _id: 0,
         title: '',
         brand: '',
         price: 0,

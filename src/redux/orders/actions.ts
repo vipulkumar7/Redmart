@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAddress } from './../../Component/Types'
-import { axiosInstance } from './../../axiosInstance/index'
 import { ActionType } from './types'
 import { Dispatch } from 'redux'
 import { ReduxData } from '../../Component/Types'
+import axiosInstance from '../../axiosInstance'
 
 interface GetOrders {
     type: ActionType.GET_ORDERS
@@ -56,8 +57,8 @@ export const setGetOrders = (data: ReduxData[]) => {
 export const getOrders = () => async (dispatch: Dispatch) => {
     dispatch(setOrdersSpinner(true))
     try {
-        const response = await axiosInstance.get(`https://redmart-products.onrender.com/orders`)
-        dispatch(setGetOrders(response.data))
+        const response = await axiosInstance?.get(`https://redmart-products.onrender.com/orders`)
+        dispatch(setGetOrders(response?.data))
         dispatch(setOrdersSpinner(false))
     } catch (error) {
         console.log(error)
@@ -76,7 +77,7 @@ export const postOrders =
     (cart: ReduxData[], address: IAddress) => (dispatch: Dispatch) => {
         dispatch(setOrdersSpinner(true))
         axiosInstance
-            .post(`https://redmart-products.onrender.com/orders`, { cart, address })
+            ?.post(`https://redmart-products.onrender.com/orders`, { cart, address })
             .then((response) => {
                 dispatch(setPostOrders(response.data))
                 dispatch(setOrdersSpinner(false))
@@ -97,7 +98,7 @@ export const setSearchOrder = (data: ReduxData[]) => {
 export const getSearchOrder = (search: string) => (dispatch: Dispatch) => {
     dispatch(setOrdersSpinner(true))
     axiosInstance
-        .get(`https://redmart-products.onrender.com/orders`, { params: { q: search } })
+        ?.get(`https://redmart-products.onrender.com/orders`, { params: { q: search } })
         .then((response) => {
             dispatch(setSearchOrder(response.data))
             dispatch(setOrdersSpinner(false))
@@ -123,10 +124,10 @@ export const setGetOrderById = (data: any) => {
 export const getOrdersById = (id: number) => async (dispatch: Dispatch) => {
     dispatch(setOrdersSpinner(true))
     try {
-        const response = await axiosInstance.get(
+        const response = await axiosInstance?.get(
             `https://redmart-products.onrender.com/orders/${id}`
         )
-        dispatch(setGetOrderById(response.data))
+        dispatch(setGetOrderById(response?.data))
         dispatch(setOrdersSpinner(false))
     } catch (error) {
         console.log(error)

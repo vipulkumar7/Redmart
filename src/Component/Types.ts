@@ -3,6 +3,7 @@ import { ReactPaginateProps } from "react-paginate";
 
 export interface ReduxData {
   id: number;
+  _id: number;
   title: string;
   brand: string;
   price: number;
@@ -21,7 +22,7 @@ interface IRating {
 
 export interface QuotesReduxData {
   name: string;
-  id: number;
+  _id: string;
   quote: string;
   rating: number;
   image: string;
@@ -155,4 +156,31 @@ export interface ValueProps {
   isGoogleUser: boolean;
   currentUser: any;
   setCurrentUser: React.Dispatch<React.SetStateAction<null>>;
+}
+
+export interface AxiosHeaders {
+  'Authorization': string | undefined;
+  'userId': string | undefined
+}
+
+export interface RegisterUserState {
+  fullName: string
+  email: string;
+  password: string;
+}
+
+export interface LoginUserState {
+  email: string;
+  password: string;
+}
+
+
+export interface AddressProps {
+  _id?: string;
+  name: string;
+  mobile: string;
+  fullAddress: string;
+  pincode: string;
+  city: string;
+  state: string;
 }

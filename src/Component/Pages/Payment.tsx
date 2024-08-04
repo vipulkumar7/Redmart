@@ -5,11 +5,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../axiosInstance'
 import swal from 'sweetalert'
-import { useNavigate, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Form from 'react-bootstrap/Form'
-import { postOrders } from '../../redux/orders/actions'
 import { RootState } from '../../redux/rootReducer'
 import { deleteAllCart } from '../../redux/cart/actions'
 import { ReduxData } from '../Types'
@@ -17,21 +15,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 const Payment: React.FC = () => {
-    const location: any = useLocation()
     const dispatch = useDispatch()
 
     const cartData: ReduxData[] = useSelector(
         (state: RootState) => state.cartReducer1.cartData
     )
 
-    const address = location.state.filteredAddress!
-    const cart = location.state.paymentData
+    // const address = location.state.filteredAddress!
+    // const cart = location.state.paymentData
 
-    const total = (Math.round(cart.total * 100) / 100).toFixed(2)
+    // const total = (Math.round(cart.total * 100) / 100).toFixed(2)
     const [, setSuccess] = useState<boolean>(false)
     const stripe: any = useStripe()
     const elements: any = useElements()
-    const navigate = useNavigate()
 
     const CARD_OPTIONS: any = {
         iconStyle: 'solid',
@@ -69,7 +65,7 @@ const Payment: React.FC = () => {
         if (!error) {
             // const { id } = paymentMethod;
             const paymentDetails = {
-                amount: parseInt(total) * 100,
+                // amount: parseInt(total) * 100,
                 // id
             }
             axiosInstance
@@ -80,9 +76,9 @@ const Payment: React.FC = () => {
                             title: 'Payment Successful!',
                             icon: 'success',
                         })
-                        dispatch(postOrders(cart.cartData, address))
+                        // dispatch(postOrders(cart.cartData, address))
                         dispatch(deleteAllCart(cartIds))
-                        navigate('/orders', { state: { cartData, address } })
+                        // navigate('/orders', { state: { cartData, address } })
                         setSuccess(true)
                     }
                 })
@@ -111,7 +107,7 @@ const Payment: React.FC = () => {
                         <div>
                             <p>
                                 Amount: <FontAwesomeIcon icon={faRupeeSign} />{' '}
-                                {parseInt(total)}
+                                {/* {parseInt(total)} */}
                             </p>
                             <CardElement options={CARD_OPTIONS} />
                         </div>
