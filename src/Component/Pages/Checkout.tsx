@@ -2,23 +2,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { loadStripe } from '@stripe/stripe-js';
 import Footer from './Footer'
 import Header from './Header'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import { AddressProps, AxiosHeaders } from '../Types'
+import { AddressProps, ReduxData } from '../Types'
 import { RootState } from '../../redux/rootReducer'
 import { deleteAddress, getAddress } from '../../redux/address/actions'
 import { getCookie } from '../../commonFunction'
 import AddAddressModal from '../modals/AddAddressModal'
 import EditAddressModal from '../modals/EditAddressModal'
+import axiosInstance from '../../axiosInstance'
+import API_ENDPOINTS from '../../config/apiconfig'
 // import UpdateAddress from './UpdateAddress'
 
 const Checkout: React.FC = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+
+    const cartData: ReduxData[] = useSelector(
+        (state: RootState) => state.cartReducer1.cartData
+    )
 
     const [showAddModal, setShowAddModal] = useState<boolean>(false);
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
@@ -37,7 +42,7 @@ const Checkout: React.FC = () => {
     };
 
     const userId: any = getCookie("userId")
-    const headers: AxiosHeaders = {
+    const headers: any = {
         'Authorization': getCookie('authToken'),
         "userId": userId
     }
@@ -50,13 +55,24 @@ const Checkout: React.FC = () => {
         dispatch(deleteAddress(id as any, headers));
     }
 
-    const handlePayment = () => {
-        // const filteredAddress = addressData.filter((item) => {
-        //     if (item.id === cardSelect) return item
-        // })[0]
-        navigate('/payment')
+    const handlePayment = async () => {
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY);
+        const body = {
+            products: cartData
+        }
+        await axiosInstance
+            ?.post(`${API_ENDPOINTS.createCheckoutsession}`, JSON.stringify(body), { headers })
+            .then((res) => {
+                return stripe?.redirectToCheckout({
+                    sessionId: res.data.id
+                })
+            })
+            .catch((error) => {
+                // Handle the error from axios or redirectToCheckout
+                console.error('An error occurred:', error);
+                alert('An error occurred. Please try again later.');
+            });
     }
-
 
     return (
         <div id="page-container">
