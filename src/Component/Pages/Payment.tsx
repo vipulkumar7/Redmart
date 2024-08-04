@@ -24,10 +24,10 @@ const Payment: React.FC = () => {
         (state: RootState) => state.cartReducer1.cartData
     )
 
-    const address = location.state.filteredAddress!
-    const cart = location.state.paymentData
+    // const address = location.state.filteredAddress!
+    // const cart = location.state.paymentData
 
-    const total = (Math.round(cart.total * 100) / 100).toFixed(2)
+    // const total = (Math.round(cart.total * 100) / 100).toFixed(2)
     const [, setSuccess] = useState<boolean>(false)
     const stripe: any = useStripe()
     const elements: any = useElements()
@@ -69,7 +69,7 @@ const Payment: React.FC = () => {
         if (!error) {
             // const { id } = paymentMethod;
             const paymentDetails = {
-                amount: parseInt(total) * 100,
+                // amount: parseInt(total) * 100,
                 // id
             }
             axiosInstance
@@ -80,9 +80,9 @@ const Payment: React.FC = () => {
                             title: 'Payment Successful!',
                             icon: 'success',
                         })
-                        dispatch(postOrders(cart.cartData, address))
+                        // dispatch(postOrders(cart.cartData, address))
                         dispatch(deleteAllCart(cartIds))
-                        navigate('/orders', { state: { cartData, address } })
+                        // navigate('/orders', { state: { cartData, address } })
                         setSuccess(true)
                     }
                 })
@@ -111,7 +111,7 @@ const Payment: React.FC = () => {
                         <div>
                             <p>
                                 Amount: <FontAwesomeIcon icon={faRupeeSign} />{' '}
-                                {parseInt(total)}
+                                {/* {parseInt(total)} */}
                             </p>
                             <CardElement options={CARD_OPTIONS} />
                         </div>

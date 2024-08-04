@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from './Footer'
@@ -13,7 +14,7 @@ import {
     faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { RootState } from '../../redux/rootReducer'
-import { ReduxData } from '../Types'
+import { AxiosHeaders, ReduxData } from '../Types'
 import {
     cartIncrement,
     getCart,
@@ -21,6 +22,7 @@ import {
     deleteCart,
 } from '../../redux/cart/actions'
 import { useAuth } from "../../contexts/authContext";
+import { getCookie } from '../../commonFunction'
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch()
@@ -38,9 +40,16 @@ const Cart: React.FC = () => {
     const tax: number = SubTotal * 0.05
     const total: number = SubTotal * 1.05
 
+    const userId = getCookie("userId");
+
+    const headers: AxiosHeaders = {
+        'Authorization': getCookie('authToken'),
+        'userId': userId,
+    }
+
     useDocumentTitle('Cart')
     useEffect(() => {
-        dispatch(getCart())
+        dispatch(getCart(headers))
     }, [])
 
     const onClickRemoveFromCart = (cart: ReduxData) => {
@@ -53,17 +62,17 @@ const Cart: React.FC = () => {
                     text: `Successfully removed ${cart.title} from your cart`,
                     icon: 'success',
                 })
-                dispatch(deleteCart(cart.id))
+                dispatch(deleteCart(cart._id, headers))
             }
         })
     }
 
-    const handleAddQuantity = (cart: ReduxData) => {
-        dispatch(cartIncrement(cart))
+    const handleAddQuantity = (id: string) => {
+        dispatch(cartIncrement(id, headers))
     }
 
-    const handleSubQuantity = (cart: ReduxData) => {
-        dispatch(cartDecrement(cart))
+    const handleSubQuantity = (id: string) => {
+        dispatch(cartDecrement(id, headers))
     }
 
     const onClickProductDetails = (productID: number) => {
@@ -71,11 +80,11 @@ const Cart: React.FC = () => {
     }
 
     const handlePlaceOrder = () => {
-        !userLoggedIn && swal({
+        !userLoggedIn || !userLoggedIn && swal({
             title: 'Please login before goto payment page.',
             // icon: 'success',
         })
-        userLoggedIn ? navigate('/checkout', { state: { cartData, total } }) : navigate('/login')
+        userLoggedIn || userId ? navigate('/checkout', { state: { cartData, total } }) : navigate('/login')
     }
 
     return (
@@ -93,7 +102,7 @@ const Cart: React.FC = () => {
                         </thead>
                         <tbody>
                             {cartData?.map((cart) => (
-                                <tr key={cart.id}>
+                                <tr key={cart._id}>
                                     <td>
                                         <div className="cart-info">
                                             <img
@@ -106,7 +115,7 @@ const Cart: React.FC = () => {
                                                     className="cursor"
                                                     onClick={() => {
                                                         onClickProductDetails(
-                                                            cart.id
+                                                            cart._id
                                                         )
                                                     }}
                                                 >
@@ -162,7 +171,7 @@ const Cart: React.FC = () => {
                                                     : 'cart-btn cursor disable-decrement-cart'
                                             }
                                             onClick={() => {
-                                                handleSubQuantity(cart)
+                                                handleSubQuantity(cart._id as any)
                                             }}
                                         >
                                             <FontAwesomeIcon
@@ -177,7 +186,7 @@ const Cart: React.FC = () => {
                                                     : 'cart-btn cursor disable-decrement-cart'
                                             }
                                             onClick={() => {
-                                                handleAddQuantity(cart)
+                                                handleAddQuantity(cart._id as any)
                                             }}
                                         >
                                             <FontAwesomeIcon

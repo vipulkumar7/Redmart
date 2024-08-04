@@ -1,35 +1,55 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
-import { NavLink, Navigate } from 'react-router-dom'
+import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import { useDocumentTitle } from '../setDocumentTitle'
 import { imagePath } from '../../utils/images'
 import { useAuth } from "../../contexts/authContext";
-import { doCreateUserWithEmailAndPassword } from "../../firebase/auth";
+// import { doCreateUserWithEmailAndPassword } from "../../firebase/auth";
+import axiosInstance from '../../axiosInstance'
+import API_ENDPOINTS from '../../config/apiconfig'
+import { RegisterUserState } from '../Types'
 
 const SignUp: React.FC = () => {
     useDocumentTitle('Sign Up')
-
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setconfirmPassword] = useState<string>("");
+    const navigate = useNavigate()
+    const [user, setUser] = useState<RegisterUserState>({ fullName: '', email: "", password: "" });
     const [isRegistering, setIsRegistering] = useState<boolean>(false);
     const [errorMessage] = useState<string>("");
 
     const { userLoggedIn } = useAuth()!;
 
-    const onSubmit = async (e: any) => {
-        e.preventDefault();
-        if (!isRegistering) {
-            setIsRegistering(true);
-            await doCreateUserWithEmailAndPassword(email, password);
-        }
+    // const onSubmit = async (e: any) => {
+    //     e.preventDefault();
+    //     if (!isRegistering) {
+    //         setIsRegistering(true);
+    //         await doCreateUserWithEmailAndPassword(user.email, user.password);
+    //     }
+    // };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    // if (isAuthenticated) {
-    //     navigate('/')
-    // }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!isRegistering) {
+            try {
+                setIsRegistering(true);
+                const response = await axiosInstance?.post(`${API_ENDPOINTS.createUser}`, user)
+                const { data: { data: { _id: userId, fullName }, jwtToken }, status } = response
+                if (status === 201) {
+                    document.cookie = `authToken=${jwtToken}`;
+                    document.cookie = `userId=${userId}`;
+                    document.cookie = `fullName=${fullName}`;
+                    navigate("/");
+                }
+            } catch (error) {
+                console.log(error, 'error')
+            }
+        }
+    };
 
     return (
         <div id="page-container">
@@ -56,37 +76,35 @@ const SignUp: React.FC = () => {
                                 </div>
                                 <form
                                     id="RegForm"
-                                    onSubmit={onSubmit}
+                                    // onSubmit={onSubmit}
+                                    onSubmit={(e) => { handleSubmit(e) }}
                                 >
+                                    <input
+                                        type="text"
+                                        placeholder="Full Name"
+                                        value={user.fullName}
+                                        name='fullName'
+                                        required
+                                        onChange={handleChange}
+                                        disabled={isRegistering}
+                                    />
                                     <input
                                         type="email"
                                         placeholder="Email"
-                                        value={email}
+                                        name="email"
+                                        value={user.email}
                                         required
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                     />
                                     <input
                                         type="password"
                                         placeholder="Password"
-                                        value={password}
+                                        name="password"
+                                        value={user.password}
                                         required
-                                        onChange={(e) => {
-                                            setPassword(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                         disabled={isRegistering}
-                                    />
-
-                                    <input
-                                        type="password"
-                                        placeholder="Confirm password"
-                                        value={confirmPassword}
-                                        required
-                                        onChange={(e) => {
-                                            setconfirmPassword(e.target.value);
-                                        }}
-                                        disabled={isRegistering}
+                                        autoComplete="off"
                                     />
                                     {errorMessage && (
                                         <span className="text-red-600 font-bold">{errorMessage}</span>

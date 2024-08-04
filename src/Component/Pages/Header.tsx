@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,14 +20,13 @@ import { ReduxData } from '../Types'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useAuth } from "../../contexts/authContext";
 import { doSignOut } from "../../firebase/auth";
+import { deleteCookie, getCookie } from '../../commonFunction'
 
 const Header: React.FC = () => {
     const navigate = useNavigate()
-    const location = useLocation()
+    const { pathname } = useLocation()
     const { userLoggedIn, currentUser } = useAuth()!;
-
-    console.log(useAuth())
-
+    const [isLoggedin, setIsLoggedin] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
     const cartData: ReduxData[] = useSelector(
         (state: RootState) => state.cartReducer1.cartData
@@ -37,6 +36,32 @@ const Header: React.FC = () => {
         (acc: number, curr: ReduxData) => acc + curr.quantity!,
         0
     )
+
+    const myCookieValue = getCookie("authToken");
+    const userName = getCookie("fullName");
+
+    useEffect(() => {
+        myCookieValue && setIsLoggedin(true);
+    }, [myCookieValue]);
+
+
+    const handleLogout = async () => {
+        setIsLoggedin(false);
+        deleteCookie("authToken");
+        deleteCookie("userId");
+        deleteCookie("fullName");
+        navigate("/login");
+    };
+
+    const handleSocialLogout = async () => {
+        doSignOut().then(() => {
+            setIsLoggedin(false);
+            deleteCookie("authToken");
+            deleteCookie("userId");
+            deleteCookie("fullName");
+            navigate("/login");
+        })
+    }
 
     const handleMenu = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         e.preventDefault()
@@ -94,7 +119,7 @@ const Header: React.FC = () => {
                                     </span>
                                 </NavLink>
                             </li>
-                            {userLoggedIn ?
+                            {isLoggedin || userLoggedIn ?
                                 <li>
                                     <NavLink
                                         to="/cart"
@@ -126,7 +151,7 @@ const Header: React.FC = () => {
                                     </span>
                                 </NavLink>
                             </li>
-                            {userLoggedIn ? (
+                            {isLoggedin || userLoggedIn ? (
                                 <li>
                                     <Dropdown
                                         onMouseOver={() => {
@@ -138,14 +163,14 @@ const Header: React.FC = () => {
                                         show={dropdownOpen}
                                     >
                                         <Dropdown.Toggle className="user-dropdown-margin">
-                                            {/* <FontAwesomeIcon icon={faUser} />{' '} */}
-                                            <span>
+                                            <span>{userLoggedIn &&
                                                 <img style={{
                                                     borderRadius: "50%"
                                                 }} src={currentUser?.photoURL} width={'30px'} height={'30px'} />
+                                            }
                                             </span>
                                             <span className="authName">
-                                                {' '}{currentUser?.displayName}{' '}
+                                                {' '}{userLoggedIn ? currentUser?.displayName : userName}{' '}
                                             </span>
                                             <FontAwesomeIcon
                                                 icon={
@@ -181,17 +206,28 @@ const Header: React.FC = () => {
                                                 About
                                             </Dropdown.Item>
                                             <Dropdown.Item
-                                                href="/login"
-                                                onClick={() => {
-                                                    doSignOut().then(() => {
-                                                        navigate("/login");
-                                                    });
+                                                // href="/login"
+                                                // onClick={() => {
+                                                //     isLoggedin ? handleLogout() :
+                                                //         handleSocialLogout();
+                                                // }}
+                                                onClick={async (e) => {
+                                                    e.preventDefault(); // Prevent default href action
+                                                    try {
+                                                        if (isLoggedin) {
+                                                            await handleLogout(); // Wait for logout to complete
+                                                        } else {
+                                                            await handleSocialLogout(); // Wait for social logout to complete
+                                                        }
+                                                    } catch (error) {
+                                                        console.error('Error during logout:', error);
+                                                    }
                                                 }}
                                             >
                                                 <FontAwesomeIcon
                                                     icon={faSignOutAlt}
                                                 />{' '}
-                                                {userLoggedIn ? 'Logout' : "Login"}
+                                                {isLoggedin || userLoggedIn ? 'Logout' : "Login"}
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -207,11 +243,8 @@ const Header: React.FC = () => {
                             </NavLink></li>}
                         </ul>
                     </nav>
-                    {/* <span>
-                        <FontAwesomeIcon icon={faShoppingBag} />
-                    </span> */}
-                    {location.pathname !== '/login' &&
-                        location.pathname !== '/signup' && (
+                    {pathname !== '/login' &&
+                        pathname !== '/signup' && (
                             <img
                                 src={imagePath.menu}
                                 alt="menu"

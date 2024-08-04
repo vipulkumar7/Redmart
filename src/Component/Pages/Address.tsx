@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     faEdit,
@@ -11,9 +12,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteAddress, getAddress } from '../../redux/address/actions'
 import { RootState } from '../../redux/rootReducer'
 // import FormModal from '../modals/FormModal'
-import { IAddress } from '../Types'
+import { AxiosHeaders, IAddress } from '../Types'
 import Footer from './Footer'
 import Header from './Header'
+import { getCookie } from '../../commonFunction'
 // import UpdateAddress from './UpdateAddress'
 
 const Address: React.FC = () => {
@@ -36,9 +38,15 @@ const Address: React.FC = () => {
         (state: RootState) => state.addressReducer.addressData
     )
 
+    const userId: any = getCookie("userId")
+    const headers: AxiosHeaders = {
+        'Authorization': getCookie('authToken'),
+        "userId": userId
+    }
+
     useEffect(() => {
         setCurrentAddress(addressData)
-        dispatch(getAddress())
+        dispatch(getAddress(headers))
     }, [])
 
     // const addModalClose = () => {
@@ -51,7 +59,7 @@ const Address: React.FC = () => {
 
     const handleDeleteAddress = (id: number) => {
         dispatch(deleteAddress(id))
-        dispatch(getAddress())
+        dispatch(getAddress(headers))
     }
 
     const handleEditAddress = (item: IAddress) => {
