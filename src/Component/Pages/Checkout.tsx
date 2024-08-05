@@ -16,6 +16,7 @@ import AddAddressModal from '../modals/AddAddressModal'
 import EditAddressModal from '../modals/EditAddressModal'
 import axiosInstance from '../../axiosInstance'
 import API_ENDPOINTS from '../../config/apiconfig'
+import { getCart } from '../../redux/cart/actions';
 // import UpdateAddress from './UpdateAddress'
 
 const Checkout: React.FC = () => {
@@ -48,6 +49,7 @@ const Checkout: React.FC = () => {
     }
 
     useEffect(() => {
+        userId && dispatch(getCart(headers))
         dispatch(getAddress(headers))
     }, [])
 

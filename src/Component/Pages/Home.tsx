@@ -26,6 +26,7 @@ import {
 import { filledStar, emptyStar, getCookie } from '../../commonFunction'
 import { getCart } from '../../redux/cart/actions'
 import { getOrders } from '../../redux/orders/actions'
+import { getAddress } from '../../redux/address/actions'
 
 const Home: React.FC = () => {
     const dispatch = useDispatch()
@@ -62,8 +63,8 @@ const Home: React.FC = () => {
         dispatch(getQuotes())
         userId && dispatch(getCart(headers))
         dispatch(getOrders())
-        // userId && dispatch(getAddress(headers))
-    }, [dispatch])
+        userId && dispatch(getAddress(headers))
+    }, [dispatch, userId])
 
     const onClickProductDetails = (productID: number) => {
         navigate(`/product/${productID}`)
