@@ -41,4 +41,5 @@ export const loginApiCall = async (user: LoginUserState) => {
         document.cookie = `userId=${userId}`;
         document.cookie = `fullName=${fullName}`;
     }
+    return fullName;
 }

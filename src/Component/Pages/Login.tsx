@@ -40,8 +40,12 @@ const Login: React.FC = () => {
                 //     document.cookie = `fullName=${fullName}`;
                 //     navigate("/");
                 // }
-                loginApiCall(user)
-                navigate('/')
+                const fullName = await loginApiCall(user)
+                navigate('/', {
+                    state: {
+                        fullName
+                    }
+                })
             } catch (error) {
                 console.log(error, 'error')
             }
