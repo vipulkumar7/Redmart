@@ -90,7 +90,7 @@ const Cart: React.FC = () => {
     return (
         <div id="page-container">
             <Header />
-            {cartData?.length !== 0 && cartData ? (
+            {userId && cartData?.length !== 0 && cartData ? (
                 <div className="small-container cart-page" id="content-wrap">
                     <table className="table1">
                         <thead>

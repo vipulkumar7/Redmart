@@ -70,7 +70,6 @@ const Checkout: React.FC = () => {
                 })
             })
             .catch((error) => {
-                // Handle the error from axios or redirectToCheckout
                 console.error('An error occurred:', error);
                 alert('An error occurred. Please try again later.');
             });

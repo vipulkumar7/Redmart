@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
@@ -23,7 +24,7 @@ import { doSignOut } from "../../firebase/auth";
 import { deleteCookie, getCookie } from '../../commonFunction'
 
 const Header: React.FC = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { pathname } = useLocation()
     const { userLoggedIn, currentUser } = useAuth()!;
     const [isLoggedin, setIsLoggedin] = useState(false);
@@ -41,26 +42,24 @@ const Header: React.FC = () => {
     const userName = getCookie("fullName");
 
     useEffect(() => {
-        myCookieValue && setIsLoggedin(true);
+        !userLoggedIn && myCookieValue && setIsLoggedin(true);
     }, [myCookieValue]);
 
-
-    const handleLogout = async () => {
-        setIsLoggedin(false);
+    const removeCookie = () => {
         deleteCookie("authToken");
         deleteCookie("userId");
         deleteCookie("fullName");
         navigate("/login");
+    }
+
+    const handleLogout = () => {
+        setIsLoggedin(false);
+        removeCookie()
     };
 
     const handleSocialLogout = async () => {
-        doSignOut().then(() => {
-            setIsLoggedin(false);
-            deleteCookie("authToken");
-            deleteCookie("userId");
-            deleteCookie("fullName");
-            navigate("/login");
-        })
+        await doSignOut();
+        removeCookie()
     }
 
     const handleMenu = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
@@ -206,22 +205,8 @@ const Header: React.FC = () => {
                                                 About
                                             </Dropdown.Item>
                                             <Dropdown.Item
-                                                // href="/login"
-                                                // onClick={() => {
-                                                //     isLoggedin ? handleLogout() :
-                                                //         handleSocialLogout();
-                                                // }}
-                                                onClick={async (e) => {
-                                                    e.preventDefault(); // Prevent default href action
-                                                    try {
-                                                        if (isLoggedin) {
-                                                            await handleLogout(); // Wait for logout to complete
-                                                        } else {
-                                                            await handleSocialLogout(); // Wait for social logout to complete
-                                                        }
-                                                    } catch (error) {
-                                                        console.error('Error during logout:', error);
-                                                    }
+                                                onClick={async () => {
+                                                    isLoggedin ? handleLogout() : handleSocialLogout();
                                                 }}
                                             >
                                                 <FontAwesomeIcon

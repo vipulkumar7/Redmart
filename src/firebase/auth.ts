@@ -12,6 +12,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  signOut,
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (
@@ -92,8 +93,12 @@ export const doSignInWithGithub = async () => {
   // add user to firestore
 };
 
-export const doSignOut = () => {
-  return auth.signOut();
+export const doSignOut = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error signing out: ", error);
+  }
 };
 
 export const doPasswordReset = (email: string) => {
