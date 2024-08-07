@@ -6,8 +6,8 @@ const Footer: React.FC = () => {
     const currentYear = date.getFullYear()
     return (
         <>
-            <div className="footer" id="footer">
-                <div className="footer-container">
+            <div id="footer">
+                <div className="footer-container footer">
                     <div className="row">
                         <div className="footer-col_1">
                             <h3>Download our App</h3>
