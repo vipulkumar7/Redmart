@@ -327,6 +327,8 @@ const Home: React.FC = () => {
                                         src={item.image}
                                         alt="user-1"
                                         loading="lazy"
+                                        width="50px"
+                                        height="50px"
                                     />
                                     <h3>{item.name}</h3>
                                 </div>
@@ -334,7 +336,7 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {/* Testimonial Start */}
+                {/* Testimonial End */}
 
                 {/* Brands Start */}
 
