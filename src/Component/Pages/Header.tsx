@@ -30,7 +30,7 @@ const Header: React.FC = () => {
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false)
     const cartData: ReduxData[] = useSelector(
-        (state: RootState) => state.cartReducer1.cartData
+        (state: RootState) => state.cartReducer.cartData
     )
 
     const totalCount: number = cartData.reduce(

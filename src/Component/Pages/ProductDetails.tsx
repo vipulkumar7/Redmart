@@ -44,7 +44,7 @@ const ProductDetails: React.FC = () => {
         (state: RootState) => state.productReducer.relatedProducts
     )
     const cartData: ReduxData[] = useSelector(
-        (state: RootState) => state.cartReducer1.cartData
+        (state: RootState) => state.cartReducer.cartData
     )
 
     const userId = getCookie("userId");

@@ -3,21 +3,19 @@ import { combineReducers } from 'redux'
 import authReducer from './auth/reducer'
 import productReducer from './productPage/reducer'
 import aboutReducer from './aboutPage/reducer'
-import cartReducer from './cartPage/reducer'
 import addressReducer from './address/reducer'
 import ordersReducer from './orders/reducer'
-import cartReducer1 from './cart/reducer'
+import cartReducer from './cart/reducer'
 import { Action } from './auth/actions'
 import { ActionType } from './auth/types'
 
 const appReducer = combineReducers({
     authReducer,
     productReducer,
-    cartReducer,
     aboutReducer,
     addressReducer,
     ordersReducer,
-    cartReducer1,
+    cartReducer,
 })
 
 const rootReducer: any = (state: any, action: Action) => {

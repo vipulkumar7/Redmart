@@ -23,7 +23,7 @@ const Checkout: React.FC = () => {
     const dispatch = useDispatch()
 
     const cartData: ReduxData[] = useSelector(
-        (state: RootState) => state.cartReducer1.cartData
+        (state: RootState) => state.cartReducer.cartData
     )
 
     const [showAddModal, setShowAddModal] = useState<boolean>(false);

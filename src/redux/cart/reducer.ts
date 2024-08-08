@@ -12,7 +12,8 @@ const initialState = {
     cartData: [],
 }
 
-const cartReducer1 = (state: CartState = initialState, action: Action) => {
+const cartReducer = (state: CartState = initialState, action: Action) => {
+    console.log(action.payload, 'action.payload')
     switch (action.type) {
         case ActionType.SPINNER:
             return {
@@ -29,4 +30,4 @@ const cartReducer1 = (state: CartState = initialState, action: Action) => {
     }
 }
 
-export default cartReducer1
+export default cartReducer

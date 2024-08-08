@@ -347,6 +347,8 @@ const Home: React.FC = () => {
                                 <img
                                     src={imagePath.logoGodrej}
                                     alt="logo-godrej"
+                                    width="160px"
+                                    height="80px"
                                     loading="lazy"
                                 />
                             </div>
@@ -354,6 +356,8 @@ const Home: React.FC = () => {
                                 <img
                                     src={imagePath.logoOppo}
                                     alt="logo-oppo"
+                                    width="160px"
+                                    height="80px"
                                     loading="lazy"
                                 />
                             </div>
@@ -361,6 +365,8 @@ const Home: React.FC = () => {
                                 <img
                                     src={imagePath.logoCocaCola}
                                     alt="logo-coca-cola"
+                                    width="160px"
+                                    height="80px"
                                     loading="lazy"
                                 />
                             </div>
@@ -368,6 +374,8 @@ const Home: React.FC = () => {
                                 <img
                                     src={imagePath.logoPaypal}
                                     alt="logo-paypal"
+                                    width="160px"
+                                    height="80px"
                                     loading="lazy"
                                 />
                             </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useSelector } from 'react-redux'
 import { Route, RouteProps, useNavigate } from 'react-router-dom'
 // import { AuthData } from '../Component/Types'

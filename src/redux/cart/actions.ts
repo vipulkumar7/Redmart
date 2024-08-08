@@ -24,6 +24,7 @@ interface Spinner {
 }
 
 export const setCartSpinner = (isSpin: boolean) => {
+  console.log(isSpin, 'isSpin')
   return {
     type: ActionType.SPINNER,
     payload: isSpin,
