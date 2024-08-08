@@ -18,11 +18,15 @@ const Footer: React.FC = () => {
                                 <img
                                     src={imagePath.playStore}
                                     alt="play-store"
+                                    width="140px"
+                                    height="40px"
                                     loading="lazy"
                                 />
                                 <img
                                     src={imagePath.appStore}
                                     alt="app-store"
+                                    width="140px"
+                                    height="40px"
                                     loading="lazy"
                                 />
                             </div>
@@ -31,6 +35,8 @@ const Footer: React.FC = () => {
                             <img
                                 src={imagePath.logoWhite}
                                 alt="logo-white"
+                                width="180px"
+                                height="50px"
                                 loading="lazy"
                             />
                             <p>
