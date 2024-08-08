@@ -30,7 +30,7 @@ const Cart: React.FC = () => {
     const { userLoggedIn } = useAuth()!;
 
     const cartData: ReduxData[] = useSelector(
-        (state: RootState) => state.cartReducer1.cartData
+        (state: RootState) => state.cartReducer.cartData
     )
 
     const SubTotal: number = cartData.reduce(
