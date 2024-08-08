@@ -18,7 +18,7 @@ const Payment: React.FC = () => {
     const dispatch = useDispatch()
 
     const cartData: ReduxData[] = useSelector(
-        (state: RootState) => state.cartReducer1.cartData
+        (state: RootState) => state.cartReducer.cartData
     )
 
     // const address = location.state.filteredAddress!
