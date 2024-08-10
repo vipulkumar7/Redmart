@@ -21,8 +21,6 @@ const Login: React.FC = () => {
     const [isSigningIn, setIsSigningIn] = useState<boolean>(false);
     const [errorMessage] = useState<string>('');
     const [user, setUser] = useState<LoginUserState>({ email: "", password: "" });
-    // const [isLoggedin, setIsLoggedin] = useState(false);
-    // const authToken = getCookie("authToken");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,14 +30,6 @@ const Login: React.FC = () => {
         e.preventDefault();
         if (!isSigningIn) {
             try {
-                // const response = await axiosInstance?.post(`${API_ENDPOINTS.loginUser}`, user)
-                // const { data: { jwtToken, tokenObject: { _id: userId, fullName } }, status } = response
-                // if (status === 200) {
-                //     document.cookie = `authToken=${jwtToken}`;
-                //     document.cookie = `userId=${userId}`;
-                //     document.cookie = `fullName=${fullName}`;
-                //     navigate("/");
-                // }
                 const fullName = await loginApiCall(user)
                 navigate('/', {
                     state: {
@@ -74,10 +64,6 @@ const Login: React.FC = () => {
             });
         }
     };
-
-    // if (isAuthenticated) {
-    //     navigate('/')
-    // }
 
     return (
         <div id="page-container">
