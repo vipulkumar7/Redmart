@@ -20,14 +20,6 @@ const SignUp: React.FC = () => {
 
     const { userLoggedIn } = useAuth()!;
 
-    // const onSubmit = async (e: any) => {
-    //     e.preventDefault();
-    //     if (!isRegistering) {
-    //         setIsRegistering(true);
-    //         await doCreateUserWithEmailAndPassword(user.email, user.password);
-    //     }
-    // };
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
@@ -76,7 +68,6 @@ const SignUp: React.FC = () => {
                                 </div>
                                 <form
                                     id="RegForm"
-                                    // onSubmit={onSubmit}
                                     onSubmit={(e) => { handleSubmit(e) }}
                                 >
                                     <input
